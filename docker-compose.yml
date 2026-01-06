@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  postgres:
+  auth-db:
     image: postgres:15-alpine
     container_name: finity-auth-postgres
     environment:
@@ -26,37 +24,21 @@ services:
       dockerfile: Dockerfile
     container_name: finity-auth-backend
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/finity_auth
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
-      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: ${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-30}
-      JWT_REFRESH_TOKEN_EXPIRE_DAYS: ${JWT_REFRESH_TOKEN_EXPIRE_DAYS:-7}
-      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
-      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
-      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID:-}
-      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET:-}
-      TWITTER_CLIENT_ID: ${TWITTER_CLIENT_ID:-}
-      TWITTER_CLIENT_SECRET: ${TWITTER_CLIENT_SECRET:-}
-      SMTP_HOST: ${SMTP_HOST:-}
-      SMTP_PORT: ${SMTP_PORT:-587}
-      SMTP_USER: ${SMTP_USER:-}
-      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
-      SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL:-}
-      SMTP_FROM_NAME: ${SMTP_FROM_NAME:-Finity Auth}
-      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:5173}
-      BACKEND_URL: ${BACKEND_URL:-http://localhost:8000}
-      ENVIRONMENT: ${ENVIRONMENT:-development}
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:3000}
-      ADMIN_EMAIL: ${ADMIN_EMAIL:-ogcnewfinity@gmail.com}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-FiniTy-2026-Data.CoM}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://postgres:postgres@auth-db:5432/finity_auth}
+      SECRET: ${SECRET}
+      USERS_VERIFICATION_TOKEN_SECRET: ${USERS_VERIFICATION_TOKEN_SECRET}
+      USERS_RESET_PASSWORD_TOKEN_SECRET: ${USERS_RESET_PASSWORD_TOKEN_SECRET}
+      BACKEND_CORS_ORIGINS: ${BACKEND_CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      # Legacy support (optional, for backward compatibility)
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}
     ports:
-      - "8001:8000"  # Map host port 8001 to container port 8000
+      - "8000:8000"  # Map host port 8000 to container port 8000
     depends_on:
-      postgres:
+      auth-db:
         condition: service_healthy
     volumes:
       - ./backend-auth:/app
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.app:app --host 0.0.0.0 --port 8000 --reload
     networks:
       - finity-network
 

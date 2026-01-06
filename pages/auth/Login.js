@@ -39,7 +39,7 @@ const Login = () => {
 
   const handleSocialLogin = async (provider) => {
     try {
-      const response = await api.get(`/api/auth/social/${provider}`);
+      const response = await api.get(`/auth/social/${provider}`);
       if (response.data.authorization_url) {
         window.location.href = response.data.authorization_url;
       }
@@ -115,6 +115,14 @@ const Login = () => {
           </div>
         </form>
 
+        {/* Social login buttons temporarily disabled - OAuth not yet configured in backend */}
+        {/* To enable: 
+            1. Set up OAuth apps (Google, Discord) in their respective developer portals
+            2. Add OAuth credentials to .env file
+            3. Configure OAuth routers in backend-auth/app/app.py
+            4. Uncomment the buttons below
+        */}
+        {/* 
         <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -149,6 +157,7 @@ const Login = () => {
             </button>
           </div>
         </div>
+        */}
 
         <p className="mt-2 text-center text-sm text-gray-600">
           Don't have an account? <a href="/register" className="font-medium text-blue-600 hover:text-blue-500">Sign up</a>

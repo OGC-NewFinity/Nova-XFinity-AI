@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     const token = Cookies.get('access_token');
     if (token) {
       try {
-        const response = await api.get('/api/users/me');
+        const response = await api.get('/users/me');
         setUser(response.data);
         setIsAuthenticated(true);
       } catch (error) {
@@ -65,11 +65,16 @@ export const AuthProvider = ({ children }) => {
         password: password
       };
       
-      console.log("Making login request to /api/auth/login with:", loginData);
+      console.log("Making login request to /auth/jwt/login with:", loginData);
       
-      const response = await api.post('/api/auth/login', loginData, {
+      // FastAPI Users expects form-encoded data (OAuth2PasswordRequestForm)
+      const formData = new URLSearchParams();
+      formData.append('username', email); // FastAPI Users uses 'username' field for email
+      formData.append('password', password);
+      
+      const response = await api.post('/auth/jwt/login', formData.toString(), {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
       
@@ -79,7 +84,7 @@ export const AuthProvider = ({ children }) => {
       
       Cookies.set('access_token', access_token, { expires: 7 });
       
-      const userResponse = await api.get('/api/users/me');
+      const userResponse = await api.get('/users/me');
       setUser(userResponse.data);
       setIsAuthenticated(true);
       
@@ -102,7 +107,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       console.log("Register Payload →", userData);
-      const response = await api.post('/api/auth/register', userData);
+      const response = await api.post('/auth/register', userData);
       console.log("Register response:", response.data);
       return { success: true, data: response.data };
     } catch (error) {

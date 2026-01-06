@@ -40,9 +40,9 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      await api.post('/api/auth/reset-password', {
+      await api.post('/auth/reset-password', {
         token,
-        new_password: password
+        password: password
       });
       setMessage('Password has been reset successfully. Redirecting to login...');
       setTimeout(() => {
