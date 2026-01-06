@@ -8,8 +8,17 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
+        strictPort: false, // Allow fallback to next available port
+        cors: {
+          origin: ['http://localhost:3000', 'http://localhost', /^http:\/\/.*\.local$/],
+          credentials: true
+        }
       },
-      plugins: [react()],
+      plugins: [
+        react({
+          include: "**/*.{jsx,js}", // Process both .js and .jsx files
+        })
+      ],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
@@ -17,7 +26,8 @@ export default defineConfig(({ mode }) => {
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),
-        }
+        },
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
       }
     };
 });

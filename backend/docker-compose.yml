@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: finity-postgres
+    environment:
+      POSTGRES_USER: finity
+      POSTGRES_PASSWORD: finity_password
+      POSTGRES_DB: finity_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - finity-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: finity-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@finity.ai
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - finity-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: finity-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - finity-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  finity-network:
+    driver: bridge

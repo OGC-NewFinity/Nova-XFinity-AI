@@ -1,39 +1,53 @@
 
-export const SYSTEM_INSTRUCTIONS = `ROLE: You are the Finity AI SEO Content Engine. Your purpose is to generate high-ranking, human-readable WordPress articles. You operate within a two-layer dashboard expanded to 90% page width.
+export const SYSTEM_INSTRUCTIONS = `ROLE: You are the Finity AI SEO Content Engine, a Senior Technical Journalist. Your purpose is to generate high-ranking, human-readable WordPress articles.
 
 I. OUTPUT ARCHITECTURE & LAYOUT
-Context: You output content for the Editor Workspace (Layer 2), which is positioned directly below the Post Configuration (Layer 1).
+Context: You output content for the Editor Workspace (Layer 2).
 Strict Format: Output RAW HTML ONLY.
 Negative Constraints: 
-- NO conversational filler (e.g., "Sure, here is your article").
-- NO markdown code fences (e.g., do not wrap in \`\`\`html).
+- NO conversational filler.
+- NO markdown code fences.
 - Start immediately with the first <h1> or <h2> tag.
 
 II. POST CONFIGURATION PARAMETERS
-- Article Type: Adhere to the specific structure (How-to, Listicle, Product Review, etc.).
-- Language: Use specific regional spelling (e.g., English AU/UK "optimise" vs US "optimize").
-- Article Size:
-    - Small (600-900 words): Concise, 3-4 subheadings.
-    - Medium (1,200-1,800 words): Balanced, 5-7 subheadings.
-    - Large (2,500+ words): Cornerstone Content, 8+ subheadings.
-- Point of View (POV): Maintain the selected person (1st Singular, 1st Plural, 2nd, or 3rd) consistently.
+- Adhere to Article Type, Language (regional spelling), Article Size, and POV.
 
 III. MEDIA FINITYHUB (IMAGE LOGIC)
-- Quantity (1-6): Distribute exactly the number of images requested by the user across the whole article.
-- Placement: Insert an [IMAGE_PLACEHOLDER] tag between sections or within sections where appropriate.
-- Prompt Engineering: For each placeholder, provide a hidden technical prompt in a data attribute or comment style like:
-  <!-- IMAGE_PROMPT: { "style": "Minimalist", "aspect": "16:9", "alt": "SEO Alt Text", "filename": "seo-optimized-name.jpg", "caption": "Descriptive caption" } -->
-- SEO Metadata: Generate a unique Alt Text (with keyphrase), Filename, and Caption.
+- Featured Image: Every article MUST have a primary "Featured Image" planned in the initial metadata.
+- Asset Distribution: Distribute requested images across the article.
+- Metadata Format: <!-- IMAGE_PROMPT: { "style": "USER_STYLE", "aspect": "USER_ASPECT", "alt": "SEO_ALT", "filename": "URL_SAFE_NAME", "caption": "READER_CAPTION", "prompt": "DETAILED_VISUAL_PROMPT" } -->
 
-IV. YOAST SEO & READABILITY STANDARDS
-- Sentence Length: At least 75% of sentences must be under 20 words.
-- Paragraphs: Maximum 150 words per paragraph.
-- Transitions: Use transition words in >30% of sentences.
-- Active Voice: Use active voice in >90% of the text.
-- Subheadings: Never exceed 300 words without a new H2 or H3.
-- Keyphrase: Include the Focus Keyphrase in the SEO Title, Intro (first 100 words), and at least one subheading.`;
+IV. YOAST SEO & READABILITY
+- Sentence Length: 75% under 20 words.
+- Paragraphs: Max 150 words.
+- Active Voice: >90%.
+- Keyphrase: Include in SEO Title, Intro, and one subheading.
+
+V. [PROVIDER SPECIFIC LOGIC]
+- If Gemini: Prioritize high-density context from RSS feeds.
+- If Claude: Prioritize technical accuracy and deep reasoning.
+- If OpenAI: Prioritize creative marketing hooks and SEO titles.
+- If Llama: Prioritize speed and concise summaries.
+
+VI. [PULSE MODE / RSS SYNTHESIS]
+Objective: Process real-time expert data. Use Synthesis Mode for RSS summaries. Citations are mandatory.`;
+
+export const PROVIDER_OPTIONS = [
+  { id: 'gemini', label: 'Google Gemini', icon: 'fa-google', badge: 'context-king' },
+  { id: 'openai', label: 'OpenAI (GPT)', icon: 'fa-bolt', badge: 'creative-pro' },
+  { id: 'anthropic', label: 'Claude (Anthropic)', icon: 'fa-brain', badge: 'technical-guru' },
+  { id: 'llama', label: 'Llama (Groq)', icon: 'fa-microchip', badge: 'speed-demon' }
+];
 
 export const TONE_OPTIONS = ['Professional', 'Conversational', 'Witty', 'Informative', 'Persuasive'];
+
+export const CATEGORY_OPTIONS = [
+  'Technical (Development/Engineering)',
+  'Strategic (Innovation/Marketing)',
+  'Insights & Education',
+  'News & Trends',
+  'Case Studies'
+];
 
 export const POV_OPTIONS = [
   'None (Neutral/Mix)',
@@ -51,6 +65,21 @@ export const ARTICLE_SIZE_OPTIONS = [
 
 export const IMAGE_QUANTITY_OPTIONS = ['1', '2', '3', '4', '5', '6'];
 
+export const ASPECT_RATIO_OPTIONS = ['1:1', '4:3', '3:4', '16:9', '9:16'];
+// Veo 3.1 specifically supports 16:9 and 9:16
+export const VIDEO_ASPECT_RATIO_OPTIONS = ['16:9', '9:16'];
+export const VIDEO_DURATION_OPTIONS = ['5s', '9s', '25s'];
+
+export const IMAGE_STYLE_OPTIONS = [
+  'Photorealistic',
+  'Cinematic',
+  'Minimalist',
+  '3D Render',
+  'Digital Illustration',
+  'Vintage Photography',
+  'Corporate Clean'
+];
+
 export const LANGUAGE_OPTIONS = [
   { label: 'English (US)', flag: '🇺🇸' },
   { label: 'English (UK)', flag: '🇬🇧' },
@@ -67,20 +96,11 @@ export const LANGUAGE_OPTIONS = [
 ];
 
 export const ARTICLE_TYPE_OPTIONS = [
-  'None (General Post)',
-  'How-to guide',
-  'Listicle',
-  'Product review',
-  'News',
-  'Comparison',
-  'Case study',
-  'Tutorial',
-  'Roundup post',
-  'Q&A page'
+  'None (General Post)', 'How-to guide', 'Listicle', 'Product review', 'News', 'Comparison', 'Case study', 'Tutorial', 'Roundup post', 'Q&A page'
 ];
 
 export const ROADMAP_DATA = [
-  { step: 'Backend Integration', tech: 'PHP / WP REST API', desc: 'Secure connection to WordPress core for direct draft publication and meta sync.' },
-  { step: 'Internal Linking', tech: 'Vector Search', desc: 'Automated internal link suggestions based on existing WordPress content clusters.' },
-  { step: 'Asset Engine', tech: 'Gemini 2.5 Flash', desc: 'Automated featured image and alt-text generation based on article focus.' }
+  { step: 'Multi-Provider Core', tech: 'Hybrid API Layer', desc: 'Switch seamlessly between Gemini, OpenAI, Claude, and Llama based on content requirements.' },
+  { step: 'Pulse Mode / RSS Synthesis', tech: 'RSS Analyst Persona', desc: 'Transform raw RSS feeds into authoritative posts.' },
+  { step: 'Automatic Fallback', tech: 'Reliability Protocol', desc: 'If a provider hits limits, the agent automatically swaps to an available backup key.' }
 ];

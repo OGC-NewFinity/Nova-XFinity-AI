@@ -8,7 +8,9 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: 'fa-gauge-high' },
     { id: 'writer', label: 'SEO Writer', icon: 'fa-feather-pointed' },
+    { id: 'mediahub', label: 'Media Hub', icon: 'fa-photo-film' },
     { id: 'research', label: 'Research Lab', icon: 'fa-microscope' },
+    { id: 'account', label: 'Account', icon: 'fa-user-circle' },
     { id: 'settings', label: 'Settings', icon: 'fa-sliders' },
   ];
 
