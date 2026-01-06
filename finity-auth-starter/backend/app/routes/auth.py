@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.responses import RedirectResponse
 import httpx
@@ -233,7 +233,7 @@ async def reset_password(request: PasswordResetConfirm, db: Session = Depends(ge
 
 
 @router.post("/verify-email")
-async def verify_email(token: str, db: Session = Depends(get_db)):
+async def verify_email(token: str = Query(..., description="Email verification token"), db: Session = Depends(get_db)):
     """Verify email address with token."""
     token_record = db.query(TokenModel).filter(
         TokenModel.token == token,

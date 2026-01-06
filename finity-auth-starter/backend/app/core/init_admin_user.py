@@ -18,9 +18,14 @@ def init_admin_user() -> None:
     """
     Initialize admin user if it doesn't exist.
     
-    Reads ADMIN_EMAIL and ADMIN_PASSWORD from environment variables.
+    Reads ADMIN_EMAIL, ADMIN_PASSWORD, and ADMIN_FULL_NAME from environment variables.
     Creates an admin user with role=admin, is_active=True, is_verified=True.
     """
+    # Check if admin creation is enabled
+    if not settings.ENABLE_ADMIN_CREATION:
+        logger.info("ℹ️  Admin user creation is disabled (ENABLE_ADMIN_CREATION=false). Skipping.")
+        return
+    
     # Check if admin credentials are provided
     if not settings.ADMIN_EMAIL or not settings.ADMIN_PASSWORD:
         logger.warning("⚠️  ADMIN_EMAIL or ADMIN_PASSWORD not set in environment. Skipping admin user creation.")
@@ -67,7 +72,7 @@ def init_admin_user() -> None:
         admin_user = User(
             email=settings.ADMIN_EMAIL,
             username=None,  # Admin can set username later if needed
-            full_name="System Administrator",
+            full_name=settings.ADMIN_FULL_NAME,
             hashed_password=hashed_password,
             is_active=True,
             is_verified=True,  # Admin is auto-verified
@@ -78,7 +83,7 @@ def init_admin_user() -> None:
         db.commit()
         db.refresh(admin_user)
         
-        logger.info("✅ Admin user created successfully.")
+        logger.info(f"✅ Admin user created successfully: {settings.ADMIN_EMAIL}")
         
     except Exception as e:
         db.rollback()

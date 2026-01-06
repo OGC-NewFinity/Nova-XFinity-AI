@@ -26,10 +26,13 @@ class Settings(BaseSettings):
     TWITTER_CLIENT_SECRET: str = ""
     
     # Email
+    EMAILS_ENABLED: bool = True
     SMTP_HOST: str = ""
     SMTP_PORT: int = 587
     SMTP_USER: str = ""
     SMTP_PASSWORD: str = ""
+    SMTP_TLS: bool = True
+    SMTP_SSL: bool = False
     SMTP_FROM_EMAIL: str = ""
     SMTP_FROM_NAME: str = "Finity Auth"
     
@@ -40,8 +43,10 @@ class Settings(BaseSettings):
     CORS_ORIGINS: Union[str, List[str]] = "http://localhost:3000,http://localhost:5173"
     
     # Admin User
+    ENABLE_ADMIN_CREATION: bool = True
     ADMIN_EMAIL: str = ""
     ADMIN_PASSWORD: str = ""
+    ADMIN_FULL_NAME: str = "Finity Administrator"
     
     @field_validator('CORS_ORIGINS', mode='before')
     @classmethod

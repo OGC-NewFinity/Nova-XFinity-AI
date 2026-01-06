@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.routes.auth import get_current_user
+from app.core.deps import require_admin
 from app.models.user import User
 from app.schemas.user import UserUpdate, UserResponse
 
@@ -59,3 +60,33 @@ async def delete_user_account(
     db.delete(current_user)
     db.commit()
     return None
+
+
+@router.get("/admin/users", response_model=list[UserResponse])
+async def list_all_users(
+    current_user: User = Depends(require_admin),
+    db: Session = Depends(get_db)
+):
+    """List all users (admin only)."""
+    users = db.query(User).all()
+    return users
+
+
+@router.get("/admin/stats")
+async def get_admin_stats(
+    current_user: User = Depends(require_admin),
+    db: Session = Depends(get_db)
+):
+    """Get admin statistics (admin only)."""
+    total_users = db.query(User).count()
+    active_users = db.query(User).filter(User.is_active == True).count()
+    verified_users = db.query(User).filter(User.is_verified == True).count()
+    from app.models.user import UserRole
+    admin_users = db.query(User).filter(User.role == UserRole.ADMIN).count()
+    
+    return {
+        "total_users": total_users,
+        "active_users": active_users,
+        "verified_users": verified_users,
+        "admin_users": admin_users
+    }

@@ -14,8 +14,8 @@ class EmailService:
         text_content: Optional[str] = None
     ) -> bool:
         """Send an email using SMTP."""
-        if not settings.SMTP_HOST:
-            print(f"[Email Service] SMTP not configured. Would send to {to_email}: {subject}")
+        if not settings.EMAILS_ENABLED or not settings.SMTP_HOST:
+            print(f"📧 [Email Service] SMTP not configured. Would send to {to_email}: {subject}")
             return False
         
         try:
@@ -31,14 +31,22 @@ class EmailService:
             part2 = MIMEText(html_content, "html")
             msg.attach(part2)
 
-            with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
-                server.starttls()
-                server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-                server.send_message(msg)
+            # Use SMTP_SSL for port 465, or SMTP with STARTTLS for port 587
+            if settings.SMTP_SSL:
+                server = smtplib.SMTP_SSL(settings.SMTP_HOST, settings.SMTP_PORT)
+            else:
+                server = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT)
+                if settings.SMTP_TLS:
+                    server.starttls()
             
+            server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
+            server.send_message(msg)
+            server.quit()
+            
+            print(f"📧 [Email Service] Email sent successfully to {to_email}: {subject}")
             return True
         except Exception as e:
-            print(f"[Email Service] Error sending email: {e}")
+            print(f"❌ [Email Service] Error sending email to {to_email}: {e}")
             return False
 
     @staticmethod
