@@ -7,10 +7,12 @@ Welcome to the comprehensive documentation for the Nova‑XFinity AI Article Wri
 ### Architecture
 - [Backend Architecture](architecture/backend-architecture.md) - Backend system architecture
 - [Frontend Architecture](architecture/frontend-architecture.md) - Frontend system architecture
-- [Backend Architecture](architecture/backend.md) - Node.js/Express backend structure and patterns
-- [Database Design](architecture/database.md) - PostgreSQL schema and Docker setup
-- [Frontend Architecture](architecture/frontend.md) - React component structure and patterns
+- [Database Schema](architecture/database-schema.md) - PostgreSQL schema and design
 - [API Documentation](architecture/api.md) - RESTful API endpoints and specifications
+- [API Routing Map](architecture/api-routing-map.md) - Complete API route mapping
+- [Authentication System](architecture/auth-system.md) - Authentication and authorization
+- [RBAC](architecture/rbac.md) - Role-based access control
+- [Quota Limits](architecture/quota-limits.md) - Usage tracking and quota enforcement
 
 ### Development
 - [Setup Guide](development/setup.md) - Development environment setup instructions

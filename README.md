@@ -171,11 +171,11 @@ See [Architecture Overview](docs/architecture/overview.md) for detailed informat
 Comprehensive documentation is available in the [`docs/`](docs/) directory:
 
 - **[Architecture](docs/architecture/)** - System design and patterns
-  - [Overview](docs/architecture/overview.md) - System architecture
-  - [Backend](docs/architecture/backend.md) - Backend structure
-  - [Database](docs/architecture/database.md) - Database schema
-  - [Frontend](docs/architecture/frontend.md) - Frontend structure
-  - [API](docs/architecture/api.md) - API documentation
+  - [Backend Architecture](docs/architecture/backend-architecture.md) - Backend system architecture
+  - [Frontend Architecture](docs/architecture/frontend-architecture.md) - Frontend system architecture
+  - [Database Schema](docs/architecture/database-schema.md) - Database schema and design
+  - [API Documentation](docs/architecture/api.md) - RESTful API endpoints and specifications
+  - [API Routing Map](docs/architecture/api-routing-map.md) - Complete API route mapping
 
 - **[Development](docs/development/)** - Development guides
   - [Setup](docs/development/setup.md) - Environment setup

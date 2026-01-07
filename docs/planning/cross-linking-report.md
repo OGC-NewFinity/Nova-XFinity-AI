@@ -224,7 +224,7 @@ No files were intentionally skipped. All 42 files in the target folders received
 The following files were not processed as they fall outside the target scope:
 - Files in `/docs/archive/` (archived/historical documents)
 - Files in `/docs/branding/` (branding documentation)
-- Root-level documentation files (`docs/README.md`, `docs/SETUP_GUIDE.md`, `docs/zz-dev-folder-check-report.md`)
+- Root-level documentation files (`docs/README.md`)
 
 **Reason:** These files were not included in the target scope specified in the task requirements.
 

@@ -22,7 +22,7 @@
 | `README.md` | (C) Reference | Main project overview and quick start guide |
 | **Official Documentation (A)** | | |
 | `docs/README.md` | (A) Official | Documentation index and navigation |
-| `docs/SETUP_GUIDE.md` | (A) Official | Comprehensive setup instructions |
+| `docs/development/setup.md` | (A) Official | Comprehensive setup instructions |
 | `docs/archive/env-setup.md` | (B) Archive | Environment variables setup reference (archived) |
 | `docs/architecture/quota-limits.md` | (A) Official | Feature documentation for quota system |
 | `docs/architecture/rbac.md` | (A) Official | RBAC implementation documentation |
@@ -63,7 +63,7 @@
 | `docs/archive/EMAIL_SETUP_COMPLETE.md` | (B) Archive | Temporary setup completion status |
 | `docs/archive/BACKEND_NETWORK_TEST_RESULTS.md` | (B) Archive | Specific network test results |
 | `docs/archive/NETWORK_DIAGNOSIS.md` | (B) Archive | Network diagnostic document |
-| `docs/archive/17-single-command-dev-setup.md` | (B) Archive | Setup improvement document (superseded by SETUP_GUIDE.md) |
+| `docs/archive/17-single-command-dev-setup.md` | (B) Archive | Setup improvement document (superseded by docs/development/setup.md) |
 | `docs/archive/markdown-audit-report.md` | (B) Archive | Documentation audit report (historical reference) |
 
 ---
@@ -75,7 +75,7 @@ nova-xfinity-ai/
 ├── README.md                                    # (C) Main project readme
 ├── docs/
 │   ├── README.md                                # (A) Documentation index
-│   ├── SETUP_GUIDE.md                           # (A) Official setup guide
+│   ├── development/setup.md                     # (A) Official setup guide
 │   │
 │   ├── architecture/                            # (A) Official architecture docs
 │   │   ├── backend-architecture.md
@@ -186,7 +186,7 @@ nova-xfinity-ai/
 
 ### For New Developers
 1. Start with `README.md` (root) for project overview
-2. Read `docs/SETUP_GUIDE.md` for installation
+2. Read `docs/development/setup.md` for installation
 3. Review `docs/architecture/backend-architecture.md` and `docs/architecture/frontend-architecture.md` for system understanding
 4. Check `docs/development/` for coding guidelines
 
