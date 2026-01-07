@@ -1,6 +1,10 @@
 # Plugin API Endpoints
 
-This document outlines all custom API endpoints registered by the Nova‑XFinity WordPress plugin. These endpoints connect the WordPress interface to external Nova‑X services and internal plugin logic, enabling real-time AI generation, content sync, and authentication workflows.
+**Description:** Outlines all custom API endpoints registered by the Nova‑XFinity WordPress plugin. These endpoints connect the WordPress interface to external Nova‑X services and internal plugin logic, enabling real-time AI generation, content sync, and authentication workflows.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
 
 ## 🌐 Base Namespace
 
@@ -106,8 +110,10 @@ Used to keep the WordPress plugin in sync with the user's current token balance 
 - JSON only; form-encoded or XML requests are rejected
 - Error codes follow standard WP REST conventions
 
-## 📌 Next Steps
+## Related Documents
 
-- Add CLI endpoint extensions (planned for v1.2)
-- Create test coverage for `/ai/` endpoints
-- Link to feature modules in `/admin/` and `/rest/`
+- [WordPress Plugin Overview](wordpress-plugin-overview.md) - WordPress plugin documentation
+- [API Documentation](../architecture/api.md) - Main API documentation
+- [API Routing Map](../architecture/api-routing-map.md) - API endpoint structure
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend implementation
+- [Deployment Process](../development/deployment-process.md) - Deployment guide

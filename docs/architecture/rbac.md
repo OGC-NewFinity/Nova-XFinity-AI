@@ -1,4 +1,10 @@
-# Role-Based Access Control (RBAC) Implementation ✅
+# Role-Based Access Control (RBAC) Implementation
+
+**Description:** Documents the implementation of a simple role-based access control system with admin/user roles.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
 
 ## Summary
 
@@ -196,3 +202,13 @@ Possible improvements (not implemented):
 ✅ **Frontend**: Admin UI displays for admin users  
 ✅ **Migration**: Script ready for existing databases  
 ⏳ **Action Required**: Run migration and set admin user
+
+---
+
+## Related Documents
+
+- [Auth System](auth-system.md) - Authentication system architecture
+- [Backend Architecture](backend-architecture.md) - Backend system architecture
+- [Database Schema](database-schema.md) - Database structure and user model
+- [Quota Limits](quota-limits.md) - Feature access and quota enforcement
+- [Authentication Integration](../integrations/authentication.md) - Authentication integration details

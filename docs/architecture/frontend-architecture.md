@@ -1,5 +1,45 @@
 # Frontend Architecture
 
+**Description:** Overview of the frontend architecture built with React 19 and HTM (HTML-in-JS) for templating. The architecture follows a feature-based modular structure.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Component Architecture](#component-architecture)
+  - [Component Types](#component-types)
+  - [Component Structure Example](#component-structure-example)
+- [State Management](#state-management)
+  - [Current Approach: Context API](#current-approach-context-api)
+  - [Planned: Zustand (Optional)](#planned-zustand-optional)
+- [Feature Modules](#feature-modules)
+  - [Writer Module](#writer-module)
+  - [Research Module](#research-module)
+  - [Media Module](#media-module)
+- [API Integration](#api-integration)
+  - [API Client](#api-client)
+  - [API Hooks](#api-hooks)
+- [Routing](#routing)
+- [Styling](#styling)
+  - [Tailwind CSS](#tailwind-css)
+  - [3D Components](#3d-components)
+- [Error Handling](#error-handling)
+  - [Error Boundary](#error-boundary)
+- [Performance Optimization](#performance-optimization)
+  - [Code Splitting](#code-splitting)
+  - [Memoization](#memoization)
+  - [Virtual Scrolling](#virtual-scrolling)
+- [Testing Strategy](#testing-strategy)
+- [Build & Deployment](#build--deployment)
+  - [Development](#development)
+  - [Production Build](#production-build)
+  - [Build Output](#build-output)
+- [Next Steps](#next-steps)
+
+---
+
 ## Overview
 
 The frontend is built with React 19 and uses HTM (HTML-in-JS) for templating. The architecture follows a feature-based modular structure, promoting code reusability and maintainability.
@@ -424,8 +464,10 @@ npm run preview  # Preview production build
 - Code splitting
 - Asset optimization
 
-## Next Steps
+## Related Documents
 
-- Review [Design System](../design/design-system.md) for UI/UX guidelines
-- Check [Code Organization](../development/code-organization.md) for structure details
-- See [API Documentation](api.md) for API integration patterns
+- [Backend Architecture](backend-architecture.md) - Backend system architecture
+- [Design System](../design/design-system.md) - UI/UX guidelines and design tokens
+- [Code Organization](../development/code-organization.md) - Project structure and organization
+- [API Documentation](api.md) - API endpoints and integration patterns
+- [State Management](state-management.md) - State management strategy

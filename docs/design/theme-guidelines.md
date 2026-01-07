@@ -1,6 +1,8 @@
 # Theme Guidelines
 
-This document defines the official Nova‑XFinity theming system for UI design and frontend implementation. It ensures consistent application of colors, spacing, typography, shadows, and elevation across all components and views in the platform.
+**Description:** Defines the official Nova‑XFinity theming system for UI design and frontend implementation. It ensures consistent application of colors, spacing, typography, shadows, and elevation across all components and views in the platform.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -112,17 +114,10 @@ Hover transitions should apply elevation increases (`+1 level`)
 
 ---
 
-## 📁 Related Files
+## Related Documents
 
-- `/styles/tokens.css` — global CSS variables
-- `/styles/theme.css` — base theme classes
-- `/docs/design/design-system.md` — extended design system
-- `/docs/design/animations.md` — transitions & keyframes
-
----
-
-## 📌 Next Steps
-
-- Ensure all components import token variables from `tokens.css`
-- Add a global theme switch (even if dark-only)
-- Expand support for hover-based depth changes
+- [Design System](design-system.md) - Extended design system documentation
+- [Animation Guidelines](animations.md) - Transitions and keyframes
+- [Component Library](components.md) - Component library and patterns
+- [UI Components](ui-components.md) - Core UI components documentation
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend implementation

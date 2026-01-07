@@ -1,5 +1,11 @@
 # Animation Guidelines
 
+**Description:** Guidelines for animations in the Nova‑XFinity AI Article Writer following consistent patterns focused on smooth transitions, 3D effects, and subtle feedback mechanisms.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
+
 ## Overview
 
 Animations in the Nova‑XFinity AI Article Writer follow a consistent pattern focused on smooth transitions, 3D effects, and subtle feedback mechanisms.
@@ -480,8 +486,10 @@ export const useAnimation = (trigger) => {
 6. **Consistent timing** - use standard durations
 7. **Smooth easing** - avoid linear animations
 
-## Next Steps
+## Related Documents
 
-- Review [Design System](design-system.md) for styling context
-- Check [Component Library](components.md) for component animations
-- See [Frontend Architecture](../architecture/frontend.md) for implementation
+- [Design System](design-system.md) - Design system and styling guidelines
+- [Component Library](components.md) - Component library and patterns
+- [Theme Guidelines](theme-guidelines.md) - Theming system and design tokens
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend implementation
+- [Responsive Layout](responsive-layout.md) - Responsive design guidelines

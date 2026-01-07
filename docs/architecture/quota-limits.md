@@ -1,6 +1,10 @@
 # Usage Tracking & Quota Limits Implementation
 
-This document describes the implementation of usage tracking and quota enforcement across the application.
+**Description:** Describes the implementation of usage tracking and quota enforcement across the application.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
 
 ## Overview
 
@@ -227,3 +231,13 @@ router.post('/generate', checkQuota('articles'), async (req, res) => {
 - Quota checks are performed before generation, not after
 - Usage is only incremented after successful generation
 - Frontend warnings are advisory; backend enforcement is authoritative
+
+---
+
+## Related Documents
+
+- [Backend Architecture](backend-architecture.md) - Backend implementation details
+- [RBAC](rbac.md) - Role-based access control and permissions
+- [Database Schema](database-schema.md) - Database structure for usage tracking
+- [API Documentation](api.md) - API endpoints for quota management
+- [Frontend Architecture](frontend-architecture.md) - Frontend quota implementation

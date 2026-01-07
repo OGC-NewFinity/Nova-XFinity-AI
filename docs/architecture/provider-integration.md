@@ -1,5 +1,11 @@
 # Provider Integration Architecture
 
+**Description:** Documents the multi-provider architecture that abstracts AI service complexity behind user-friendly "Engines." Users interact with branded engine names rather than raw model APIs.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
+
 ## Overview
 
 The Nova‑XFinity AI Article Writer uses a multi-provider architecture that abstracts AI service complexity behind user-friendly "Engines." Users interact with branded engine names rather than raw model APIs, ensuring a seamless experience while maintaining flexibility and security.
@@ -582,15 +588,10 @@ const FALLBACK_CHAINS = {
 - **Solution:** Check network connectivity
 - **Solution:** Verify provider service status
 
-## Related Documentation
+## Related Documents
 
 - [Backend Architecture](backend-architecture.md) - Backend system design
 - [Frontend Architecture](frontend-architecture.md) - Frontend system design
 - [API Documentation](api.md) - API endpoint details
-- [Backend Architecture](backend.md) - Backend implementation
+- [Database Schema](database-schema.md) - Database structure
 - [Setup Guide](../development/setup.md) - Environment configuration
-
----
-
-*Last Updated: January 2025*
-*For questions or updates, contact the development team.*

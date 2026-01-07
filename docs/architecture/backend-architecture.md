@@ -1,6 +1,26 @@
 # Nova‑XFinity AI — Backend Architecture
 
-This document provides a structural overview of the Nova‑XFinity AI backend system, including services, data flows, routing strategy, and component responsibilities.
+**Description:** Provides a structural overview of the Nova‑XFinity AI backend system, including services, data flows, routing strategy, and component responsibilities.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+## Table of Contents
+
+- [1. Overview](#1-overview)
+- [2. Services Breakdown](#2-services-breakdown)
+  - [🧩 Node.js API Backend](#nodejs-api-backend)
+  - [🔐 FastAPI Auth Backend](#fastapi-auth-backend)
+  - [🗃️ PostgreSQL Database](#postgresql-database)
+- [3. Project Structure (Node Backend)](#3-project-structure-node-backend)
+  - [Detailed Directory Structure](#detailed-directory-structure)
+- [4. API Design](#4-api-design)
+- [5. Security Features](#5-security-features)
+- [6. Planned Upgrades](#6-planned-upgrades)
+- [7. Core Services](#7-core-services)
+  - [Authentication System](#authentication-system)
+  - [API Services](#api-services)
+  - [Caching Layer (Redis)](#caching-layer-redis)
+  - [Middleware Stack](#middleware-stack)
 
 ---
 
@@ -169,3 +189,13 @@ backend/
 **Note:** Content merged from `backend.md` (deleted) - Jan 07, 2026
 
 > Last updated: Jan 07, 2026
+
+---
+
+## Related Documents
+
+- [Frontend Architecture](frontend-architecture.md) - Frontend system architecture
+- [Database Schema](database-schema.md) - Database structure and design
+- [API Documentation](api.md) - API endpoints and specifications
+- [Auth System](auth-system.md) - Authentication system architecture
+- [Provider Integration](provider-integration.md) - AI provider integration patterns

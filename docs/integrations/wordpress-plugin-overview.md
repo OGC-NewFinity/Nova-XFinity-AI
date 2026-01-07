@@ -1,6 +1,6 @@
 # WordPress Plugin Overview
 
-This document provides a complete technical and strategic overview of the official Nova‑XFinity WordPress plugin. It outlines the plugin’s role, key functionalities, integration pathways, and roadmap within the Nova‑XFinity ecosystem.
+**Description:** Provides a complete technical and strategic overview of the official Nova‑XFinity WordPress plugin. It outlines the plugin’s role, key functionalities, integration pathways, and roadmap within the Nova‑XFinity ecosystem.
 
 ---
 
@@ -84,16 +84,10 @@ No external libraries or frameworks required.
 
 ---
 
-## 📁 Related Docs
+## Related Documents
 
-- `/docs/integrations/plugin-api-endpoints.md`  
-- `/docs/development/deployment-process.md`  
-- `/docs/design/ui-components.md`
-
----
-
-## 📌 Next Steps
-
-- Finalize `/plugin-api-endpoints.md` documentation  
-- Add code snippets for each service handler  
-- Prepare CLI usage guide (for v1.2)
+- [Plugin API Endpoints](plugin-api-endpoints.md) - WordPress plugin API endpoints
+- [Deployment Process](../development/deployment-process.md) - Deployment guide
+- [UI Components](../design/ui-components.md) - UI components documentation
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
+- [Provider Integration](../architecture/provider-integration.md) - AI provider integration

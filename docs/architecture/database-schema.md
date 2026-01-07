@@ -1,6 +1,8 @@
 # Nova‑XFinity AI — Database Schema
 
-This document outlines the core database schema structure for Nova‑XFinity AI, including primary entities, relationships, and planned extensions. The database is implemented using **PostgreSQL**.
+**Description:** Outlines the core database schema structure for Nova‑XFinity AI, including primary entities, relationships, and planned extensions. The database is implemented using PostgreSQL.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -221,3 +223,13 @@ DATABASE_URL=postgresql://user:pass@host:5432/db?connection_limit=10&pool_timeou
 **Note:** Content merged from `database.md` (deleted) - Jan 07, 2026
 
 > Last updated: Jan 07, 2026
+
+---
+
+## Related Documents
+
+- [Backend Architecture](backend-architecture.md) - Backend system architecture
+- [RBAC](rbac.md) - Role-based access control implementation
+- [Quota Limits](quota-limits.md) - Usage tracking and quota system
+- [API Documentation](api.md) - API endpoints and data models
+- [Development Setup](../development/setup.md) - Database setup instructions

@@ -1,7 +1,8 @@
 # Documentation Structure Overview
 
+**Description:** Provides a comprehensive overview of all markdown documentation in the repository, including classification system and access guidelines.  
 **Last Updated:** 2026-01-07  
-**Purpose:** Provide a comprehensive overview of all markdown documentation in the repository
+**Status:** Stable
 
 ---
 
@@ -232,3 +233,13 @@ nova-xfinity-ai/
 
 **Document Status:** ✅ Organized and Classified  
 **Last Organization:** 2026-01-07
+
+---
+
+## Related Documents
+
+- [Setup Guide](setup.md) - Development environment setup
+- [Contributing Guidelines](contributing.md) - How to contribute to the project
+- [Code Organization](code-organization.md) - Project structure and organization
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend system architecture

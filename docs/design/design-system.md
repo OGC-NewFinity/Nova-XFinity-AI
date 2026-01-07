@@ -1,5 +1,56 @@
 # Design System
 
+**Description:** Defines the modern 3D-themed design system with elegant colors, smooth animations, and contemporary UI elements for the Nova‑XFinity AI Article Writer.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Color Palette](#color-palette)
+  - [Primary Colors](#primary-colors)
+  - [Secondary Colors](#secondary-colors)
+  - [Semantic Colors](#semantic-colors)
+  - [Neutral Colors](#neutral-colors)
+  - [Gradients](#gradients)
+- [Typography](#typography)
+  - [Font Family](#font-family)
+  - [Font Weights](#font-weights)
+  - [Font Sizes](#font-sizes)
+  - [Line Heights](#line-heights)
+- [3D Design Elements](#3d-design-elements)
+  - [Depth and Elevation](#depth-and-elevation)
+  - [3D Transformations](#3d-transformations)
+  - [Glassmorphism](#glassmorphism)
+- [Component Styles](#component-styles)
+  - [Buttons](#buttons)
+  - [Cards](#cards)
+  - [Inputs](#inputs)
+- [Animations](#animations)
+  - [Transitions](#transitions)
+  - [Keyframe Animations](#keyframe-animations)
+  - [Animation Usage](#animation-usage)
+- [Spacing System](#spacing-system)
+  - [Spacing Scale](#spacing-scale)
+- [Border Radius](#border-radius)
+  - [Radius Scale](#radius-scale)
+- [Shadows](#shadows)
+  - [Shadow Levels](#shadow-levels)
+- [Responsive Design](#responsive-design)
+  - [Breakpoints](#breakpoints)
+  - [Mobile First](#mobile-first)
+- [Accessibility](#accessibility)
+  - [Color Contrast](#color-contrast)
+  - [Focus States](#focus-states)
+  - [Semantic HTML](#semantic-html)
+- [Usage Guidelines](#usage-guidelines)
+  - [Do's](#dos)
+  - [Don'ts](#donts)
+- [Design Tokens](#design-tokens)
+- [Next Steps](#next-steps)
+
+---
+
 ## Overview
 
 The Nova‑XFinity AI Article Writer uses a modern 3D-themed design system with elegant colors, smooth animations, and contemporary UI elements.
@@ -463,8 +514,10 @@ export const tokens = {
 };
 ```
 
-## Next Steps
+## Related Documents
 
-- Review [Component Library](components.md) for component patterns
-- Check [Animation Guidelines](animations.md) for animation details
-- See [Frontend Architecture](../architecture/frontend.md) for implementation
+- [Component Library](components.md) - Reusable UI components and patterns
+- [Animation Guidelines](animations.md) - Animation patterns and best practices
+- [Theme Guidelines](theme-guidelines.md) - Theming system and tokens
+- [UI Components](ui-components.md) - Core UI components documentation
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend implementation

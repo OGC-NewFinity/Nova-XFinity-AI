@@ -1,5 +1,11 @@
 # Component Library
 
+**Description:** Describes reusable UI components following the 3D design system. All components are built with React and HTM, styled with Tailwind CSS.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
+
 ## Overview
 
 This document describes reusable UI components following the 3D design system. All components are built with React and HTM, styled with Tailwind CSS.
@@ -370,8 +376,10 @@ const Card3D = ({
 export default Card3D;
 ```
 
-## Next Steps
+## Related Documents
 
-- Review [Design System](design-system.md) for styling guidelines
-- Check [Animation Guidelines](animations.md) for animation patterns
-- See [Frontend Architecture](../architecture/frontend.md) for structure
+- [Design System](design-system.md) - Design system and styling guidelines
+- [Animation Guidelines](animations.md) - Animation patterns and best practices
+- [UI Components](ui-components.md) - Core UI components documentation
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend structure
+- [Code Organization](../development/code-organization.md) - Component organization guidelines

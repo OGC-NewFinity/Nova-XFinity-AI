@@ -1,6 +1,8 @@
 # Nova‑XFinity AI — Deployment Process
 
-This document outlines the steps and best practices for deploying Nova‑XFinity AI to staging or production environments.
+**Description:** Outlines the steps and best practices for deploying Nova‑XFinity AI to staging or production environments.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -92,3 +94,13 @@ docker compose up -d --build  # for server deployment
 * Pre-render landing page for SEO
 
 > Last updated: Jan 07, 2026
+
+---
+
+## Related Documents
+
+- [Setup Guide](setup.md) - Development environment setup
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend system architecture
+- [Database Schema](../architecture/database-schema.md) - Database setup and configuration
+- [Code Organization](code-organization.md) - Project structure and organization

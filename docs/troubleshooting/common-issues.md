@@ -1,6 +1,8 @@
 # Common Issues & Fixes
 
-This document provides a categorized list of frequently encountered issues within the Nova‑XFinity ecosystem. Use this as a reference before submitting a new bug report.
+**Description:** Provides a categorized list of frequently encountered issues within the Nova‑XFinity ecosystem. Use this as a reference before submitting a new bug report.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -145,3 +147,13 @@ This document provides a categorized list of frequently encountered issues withi
 - Check the [Error Report Template](./error-report-template.md) for structured reporting  
 - All critical issues are logged under `OAUTH_FIXES_MASTER_LOG.md`  
 - Contact support for persistent failures
+
+---
+
+## Related Documents
+
+- [Error Report Template](error-report-template.md) - Structured error reporting template
+- [OAuth Fixes Master Log](OAUTH_FIXES_MASTER_LOG.md) - Consolidated OAuth and authentication fixes
+- [Authentication Integration](../integrations/authentication.md) - Authentication system documentation
+- [Auth System](../architecture/auth-system.md) - Authentication system architecture
+- [Development Setup](../development/setup.md) - Development environment setup

@@ -1,6 +1,8 @@
 # Error Report Template
 
-Use this template to report bugs, crashes, or unexpected behavior in any Nova‑XFinity module, plugin, or integration. Submissions using this format ensure faster diagnosis and resolution.
+**Description:** Template for reporting bugs, crashes, or unexpected behavior in any Nova‑XFinity module, plugin, or integration. Submissions using this format ensure faster diagnosis and resolution.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -91,3 +93,11 @@ Paste relevant error logs, stack traces, or API responses here.
 > _Any other observations, theories, or related issues._
 
 ---
+
+## Related Documents
+
+- [Common Issues](common-issues.md) - Frequently encountered issues and fixes
+- [OAuth Fixes Master Log](OAUTH_FIXES_MASTER_LOG.md) - Consolidated OAuth and authentication fixes
+- [Troubleshooting Guide](../troubleshooting/common-issues.md) - Troubleshooting resources
+- [Development Setup](../development/setup.md) - Development environment setup
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture

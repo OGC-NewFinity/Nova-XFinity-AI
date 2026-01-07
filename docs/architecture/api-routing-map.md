@@ -1,6 +1,8 @@
 # Nova‑XFinity AI — API Routing Map
 
-This document outlines the structure of API endpoints in Nova‑XFinity AI. Routes are grouped by access level and organized under versioned paths (`/api/v1/`).
+**Description:** Outlines the structure of API endpoints in Nova‑XFinity AI. Routes are grouped by access level and organized under versioned paths (`/api/v1/`).  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -99,3 +101,13 @@ GET    /tools/history             → Retrieve usage history
 ```
 
 > Last updated: Jan 07, 2026
+
+---
+
+## Related Documents
+
+- [API Documentation](api.md) - Comprehensive API documentation
+- [Backend Architecture](backend-architecture.md) - Backend system architecture
+- [Auth System](auth-system.md) - Authentication and authorization
+- [Provider Integration](provider-integration.md) - AI provider integration
+- [Development Setup](../development/setup.md) - Development environment setup

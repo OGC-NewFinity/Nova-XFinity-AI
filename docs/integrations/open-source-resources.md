@@ -1,5 +1,11 @@
 # Open Source Resources
 
+**Description:** Lists all open-source templates, libraries, and resources used in the Nova‑XFinity AI Article Writer project.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
+
 ## Overview
 
 This document lists all open-source templates, libraries, and resources used in the Nova‑XFinity AI Article Writer project.
@@ -496,8 +502,10 @@ If you've modified open-source resources:
 2. **Maintain Attribution:** Credit original authors
 3. **Share Improvements:** Consider contributing back
 
-## Next Steps
+## Related Documents
 
-- Review [Authentication Integration](authentication.md) for auth templates
-- Check [Email Integration](email-autoresponders.md) for email templates
-- See [Setup Guide](../development/setup.md) for installation instructions
+- [Authentication Integration](authentication.md) - Authentication templates and resources
+- [Email Integration](email-autoresponders.md) - Email templates and libraries
+- [Setup Guide](../development/setup.md) - Installation and setup instructions
+- [Contributing Guidelines](../development/contributing.md) - Contribution guidelines
+- [Design System](../design/design-system.md) - Design resources and guidelines

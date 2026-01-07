@@ -1,6 +1,10 @@
 # Chrome Extension Integration Plan
 
-This document outlines the proposed architecture, functionality, and development phases for the official Nova‑XFinity Chrome Extension. The extension serves as a lightweight AI assistant, enabling users to access Nova‑X tools directly from their browser.
+**Description:** Outlines the proposed architecture, functionality, and development phases for the official Nova‑XFinity Chrome Extension. The extension serves as a lightweight AI assistant, enabling users to access Nova‑X tools directly from their browser.  
+**Last Updated:** 2026-01-07  
+**Status:** Draft
+
+---
 
 ## Purpose
 
@@ -83,9 +87,10 @@ Signed and uploaded via Developer Dashboard
 
 Extension ID assigned on publish
 
-## Next Steps
+## Related Documents
 
-- Finalize UI and icon set
-- Test content scripts across major sites
-- Validate session security and expiration
-- Write Web Store privacy and permissions policy
+- [WordPress Plugin Overview](wordpress-plugin-overview.md) - WordPress plugin integration
+- [Plugin API Endpoints](plugin-api-endpoints.md) - API endpoints for integrations
+- [Authentication Integration](authentication.md) - Authentication and session management
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend implementation
+- [Design System](../design/design-system.md) - UI design guidelines

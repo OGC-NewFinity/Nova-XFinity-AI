@@ -1,6 +1,8 @@
 # Nova‑XFinity AI — Auth System
 
-This document outlines the complete authentication system architecture for Nova‑XFinity AI, including login flows, token management, OAuth integrations, and role-based access control.
+**Description:** Outlines the complete authentication system architecture for Nova‑XFinity AI, including login flows, token management, OAuth integrations, and role-based access control.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -68,3 +70,13 @@ RBAC middleware gates routes based on roles.
 * View login activity and session history
 
 > Last updated: Jan 07, 2026
+
+---
+
+## Related Documents
+
+- [Authentication Integration](../integrations/authentication.md) - Authentication system integration
+- [RBAC](rbac.md) - Role-based access control implementation
+- [Backend Architecture](backend-architecture.md) - Backend system architecture
+- [API Documentation](api.md) - API authentication endpoints
+- [Troubleshooting: OAuth Fixes](../troubleshooting/OAUTH_FIXES_MASTER_LOG.md) - OAuth and authentication fixes

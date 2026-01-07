@@ -1,6 +1,10 @@
 # Responsive Layout Guidelines
 
-This document defines the responsive layout rules for the Nova‑XFinity platform. All interfaces must be mobile‑first, fluid, and adaptable across all screen sizes without breaking usability, hierarchy, or visual consistency.
+**Description:** Defines the responsive layout rules for the Nova‑XFinity platform. All interfaces must be mobile‑first, fluid, and adaptable across all screen sizes without breaking usability, hierarchy, or visual consistency.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
 
 ## Core Principles
 
@@ -95,9 +99,10 @@ video {
 ✅ No horizontal scrolling on any viewports  
 ✅ Forms and media are fully accessible  
 
-## Related Files
+## Related Documents
 
-- `/styles/layout.css`
-- `/components/Sidebar`, `/Header`, `/Card`
-- `/docs/design/theme-guidelines.md`
-- `/docs/design/ui-components.md`
+- [Theme Guidelines](theme-guidelines.md) - Theming system and design tokens
+- [UI Components](ui-components.md) - Core UI components documentation
+- [Design System](design-system.md) - Design system and styling guidelines
+- [Component Library](components.md) - Component library and patterns
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend implementation

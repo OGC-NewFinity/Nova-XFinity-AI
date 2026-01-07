@@ -1,6 +1,8 @@
 # Nova‑XFinity AI — State Management
 
-This document explains the state management strategy used in the Nova‑XFinity AI frontend application, which is built with React and uses **Riverpod-like** global context patterns (via custom providers).
+**Description:** Explains the state management strategy used in the Nova‑XFinity AI frontend application, which is built with React and uses Riverpod-like global context patterns (via custom providers).  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -70,3 +72,13 @@ State is separated by domain and synchronized with backend services through API 
 * Enable server push for credit usage updates (WebSocket/Firebase)
 
 > Last updated: Jan 07, 2026
+
+---
+
+## Related Documents
+
+- [Frontend Architecture](frontend-architecture.md) - Frontend system architecture
+- [Backend Architecture](backend-architecture.md) - Backend services and API
+- [API Documentation](api.md) - API endpoints for data synchronization
+- [Code Organization](../development/code-organization.md) - Project structure and organization
+- [Design System](../design/design-system.md) - UI components and design patterns

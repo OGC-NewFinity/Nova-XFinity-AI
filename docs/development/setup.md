@@ -1,5 +1,52 @@
 # Development Environment Setup
 
+**Description:** Comprehensive guide for setting up the development environment, including prerequisites, installation steps, configuration, and troubleshooting.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+  - [1. Clone Repository](#1-clone-repository)
+  - [2. Install Frontend Dependencies](#2-install-frontend-dependencies)
+  - [3. Setup Environment Variables](#3-setup-environment-variables)
+  - [4. Setup Backend (if using backend)](#4-setup-backend-if-using-backend)
+  - [5. Start Docker Services](#5-start-docker-services)
+  - [6. Run Database Migrations](#6-run-database-migrations)
+  - [7. Start Development Servers](#7-start-development-servers)
+- [Detailed Setup](#detailed-setup)
+  - [Frontend Setup](#frontend-setup)
+  - [Backend Setup](#backend-setup)
+  - [Docker Setup](#docker-setup)
+- [IDE Setup](#ide-setup)
+  - [VS Code Extensions](#vs-code-extensions)
+  - [VS Code Settings](#vs-code-settings)
+- [API Keys Setup](#api-keys-setup)
+  - [Google Gemini API Key](#google-gemini-api-key)
+  - [OpenAI API Key (Optional)](#openai-api-key-optional)
+  - [Anthropic Claude API Key (Optional)](#anthropic-claude-api-key-optional)
+- [Database Access](#database-access)
+  - [Using Prisma Studio](#using-prisma-studio)
+  - [Using pgAdmin](#using-pgadmin)
+  - [Using psql Command Line](#using-psql-command-line)
+- [Testing Setup](#testing-setup)
+  - [Frontend Tests](#frontend-tests)
+  - [Backend Tests](#backend-tests)
+- [Troubleshooting](#troubleshooting)
+  - [Port Already in Use](#port-already-in-use)
+  - [Docker Issues](#docker-issues)
+  - [Database Connection Issues](#database-connection-issues)
+  - [Prisma Issues](#prisma-issues)
+- [Environment Variables Reference](#environment-variables-reference)
+  - [Frontend (.env.local)](#frontend-envlocal)
+  - [Backend (.env)](#backend-env)
+- [Access Points](#access-points)
+- [Testing Locally](#testing-locally)
+- [Next Steps](#next-steps)
+
+---
+
 ## Prerequisites
 
 Before setting up the development environment, ensure you have the following installed:
@@ -431,9 +478,10 @@ Once services are running, you can test:
 
 **Note:** Content merged from `local-dev-setup.md` (deleted) - Jan 07, 2026
 
-## Next Steps
+## Related Documents
 
-- Read [Code Organization](code-organization.md) for project structure
-- Check [Contributing Guidelines](contributing.md) before making changes
-- Review [Backend Architecture](../architecture/backend-architecture.md) and [Frontend Architecture](../architecture/frontend-architecture.md) for system design
-- See [Deployment Process](deployment-process.md) for production deployment
+- [Code Organization](code-organization.md) - Project structure and organization
+- [Contributing Guidelines](contributing.md) - How to contribute to the project
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend system architecture
+- [Deployment Process](deployment-process.md) - Production deployment guide

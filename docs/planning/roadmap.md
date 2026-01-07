@@ -1,6 +1,8 @@
 # Nova‑XFinity AI — 2026 Roadmap
 
-This roadmap outlines the planned development phases and major milestones for Nova‑XFinity AI across Q1–Q3 of 2026.
+**Description:** Outlines the planned development phases and major milestones for Nova‑XFinity AI across Q1–Q3 of 2026.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
 
 ---
 
@@ -73,3 +75,13 @@ This roadmap outlines the planned development phases and major milestones for No
 * AI-powered UI editor for content blocks
 
 > Last updated: Jan 07, 2026
+
+---
+
+## Related Documents
+
+- [Project Plan](project-plan.md) - Comprehensive project plan
+- [Beta Release Checklist](beta-release-checklist.md) - Beta launch checklist
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend system architecture
+- [Development Setup](../development/setup.md) - Development environment setup

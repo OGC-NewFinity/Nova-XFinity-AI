@@ -1,5 +1,53 @@
 # Code Organization Guidelines
 
+**Description:** Guidelines for project structure and code organization following a feature-based modular structure to improve maintainability and scalability.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [Feature-Based Organization](#feature-based-organization)
+  - [Feature Structure](#feature-structure)
+  - [Feature Module Guidelines](#feature-module-guidelines)
+- [Component Organization](#component-organization)
+  - [Component Size Guidelines](#component-size-guidelines)
+  - [Breaking Down Large Components](#breaking-down-large-components)
+  - [Component Naming](#component-naming)
+  - [Component Structure Template](#component-structure-template)
+- [File Organization Rules](#file-organization-rules)
+  - [Single Responsibility Principle](#single-responsibility-principle)
+  - [File Size Limits](#file-size-limits)
+  - [Code Splitting Strategy](#code-splitting-strategy)
+- [Shared Code Organization](#shared-code-organization)
+  - [Shared Components](#shared-components)
+  - [Shared Hooks](#shared-hooks)
+  - [Shared Utils](#shared-utils)
+- [Constants Organization](#constants-organization)
+  - [Global Constants](#global-constants)
+  - [Feature-Specific Constants](#feature-specific-constants)
+- [Import Organization](#import-organization)
+  - [Import Order](#import-order)
+  - [Path Aliases (Planned)](#path-aliases-planned)
+- [Naming Conventions](#naming-conventions)
+  - [Files](#files)
+  - [Variables](#variables)
+  - [CSS Classes](#css-classes)
+- [Code Splitting Examples](#code-splitting-examples)
+  - [Example 1: Breaking Down Writer.js](#example-1-breaking-down-writerjs)
+  - [Example 2: Breaking Down MediaHub.js](#example-2-breaking-down-mediahubjs)
+  - [Example 3: Breaking Down geminiService.js](#example-3-breaking-down-geminiservicejs)
+- [Migration Strategy](#migration-strategy)
+  - [Phase 1: Extract Settings](#phase-1-extract-settings)
+  - [Phase 2: Modularize Writer](#phase-2-modularize-writer)
+  - [Phase 3: Modularize MediaHub](#phase-3-modularize-mediahub)
+  - [Phase 4: Reorganize Services](#phase-4-reorganize-services)
+  - [Phase 5: Migrate to Features](#phase-5-migrate-to-features)
+- [Best Practices](#best-practices)
+- [Next Steps](#next-steps)
+
+---
+
 ## Project Structure
 
 The project follows a **feature-based modular structure** to improve maintainability and scalability.
@@ -386,8 +434,10 @@ services/ai/
 7. **Documentation:** Comment complex logic
 8. **Testing:** Keep test files co-located
 
-## Next Steps
+## Related Documents
 
-- Review [Contributing Guidelines](contributing.md) for coding standards
-- Check [Frontend Architecture](../architecture/frontend-architecture.md) for structure details
-- See [Design System](../design/design-system.md) for component patterns
+- [Contributing Guidelines](contributing.md) - Coding standards and contribution process
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend structure details
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend structure details
+- [Design System](../design/design-system.md) - Component patterns and design guidelines
+- [Setup Guide](setup.md) - Development environment setup

@@ -1,5 +1,11 @@
 # Nova-XFinity AI — Project Plan
 
+**Description:** Comprehensive project plan outlining core features, modules, public website pages, infrastructure, and beta release checklist for Nova‑XFinity AI.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
+
 ## 1. Project Overview
 
 Nova-XFinity AI is an AI-powered content generation platform that delivers SEO-optimized articles, plugin integration with WordPress, and an evolving ecosystem of tools for creators, marketers, and developers. It includes a Web App, WordPress Plugin, and plans for Chrome Extension and public APIs.
@@ -139,3 +145,13 @@ Nova-XFinity AI is an AI-powered content generation platform that delivers SEO-o
 * Verify UI responsiveness and accessibility
 
 > 📅 Target: Beta Launch — Q1 2026
+
+---
+
+## Related Documents
+
+- [Roadmap](roadmap.md) - Development roadmap and milestones
+- [Beta Release Checklist](beta-release-checklist.md) - Beta launch checklist
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend system architecture
+- [Development Setup](../development/setup.md) - Development environment setup

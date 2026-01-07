@@ -1,6 +1,10 @@
 # UI Components
 
-This document outlines the core UI components used throughout the Nova‑XFinity platform. It defines design principles, component architecture, and usage conventions to ensure consistency, reusability, and maintainability across all frontend modules.
+**Description:** Outlines the core UI components used throughout the Nova‑XFinity platform. It defines design principles, component architecture, and usage conventions to ensure consistency, reusability, and maintainability across all frontend modules.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
 
 ## 🔹 Overview
 
@@ -131,17 +135,10 @@ The following components are currently in development:
 
 ---
 
-## 📁 Reference
+## Related Documents
 
-- `/styles/tokens.css` — design tokens
-- `/components/` — all component folders
-- `/layouts/` — high-level layout wrappers
-- `/pages/` — routes that render component trees
-
----
-
-## 📌 Next Steps
-
-- Finalize component snapshot testing setup
-- Document custom hooks (`useModal`, `useTooltip`, `useForm`)
-- Add live component playground (Storybook or in-app preview)
+- [Design System](design-system.md) - Design system and styling guidelines
+- [Component Library](components.md) - Component library and patterns
+- [Theme Guidelines](theme-guidelines.md) - Theming system and design tokens
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend implementation
+- [Code Organization](../development/code-organization.md) - Component organization guidelines

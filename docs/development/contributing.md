@@ -1,6 +1,38 @@
 # Contributing Guidelines
 
+**Description:** Guidelines for contributing to Nova‑XFinity AI Article Writer, including code standards, development workflow, pull request process, and testing requirements.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
 Thank you for your interest in contributing to Nova‑XFinity AI Article Writer! This document provides guidelines for contributing to the project.
+
+## Table of Contents
+
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [Development Workflow](#development-workflow)
+  - [Branch Naming](#branch-naming)
+  - [Commit Messages](#commit-messages)
+- [Code Standards](#code-standards)
+  - [JavaScript/React](#javascriptreact)
+  - [Code Style](#code-style)
+  - [File Organization](#file-organization)
+- [Pull Request Process](#pull-request-process)
+  - [Before Submitting](#before-submitting)
+  - [PR Description Template](#pr-description-template)
+- [Testing Guidelines](#testing-guidelines)
+  - [Frontend Tests](#frontend-tests)
+  - [Backend Tests](#backend-tests)
+- [Documentation](#documentation)
+  - [Code Comments](#code-comments)
+  - [Documentation Updates](#documentation-updates)
+- [Feature Requests](#feature-requests)
+- [Bug Reports](#bug-reports)
+- [Questions?](#questions)
+- [License](#license)
+- [Recognition](#recognition)
+
+---
 
 ## Code of Conduct
 
@@ -248,3 +280,13 @@ Contributors will be:
 - Appreciated! 🎉
 
 Thank you for contributing to Nova‑XFinity AI Article Writer!
+
+---
+
+## Related Documents
+
+- [Code Organization](code-organization.md) - Project structure and coding guidelines
+- [Setup Guide](setup.md) - Development environment setup
+- [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend system architecture
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
+- [Documentation Overview](docs-overview.md) - Documentation structure and organization

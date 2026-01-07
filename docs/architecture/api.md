@@ -1,5 +1,11 @@
 # API Documentation
 
+**Description:** Comprehensive API documentation including endpoints, authentication, request/response formats, and SDK examples.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
+
 ## Base URL
 
 **Development:** `http://localhost:3001/api`  
@@ -467,8 +473,10 @@ curl -X POST https://api.finity.ai/api/articles \
   -d '{"title":"My Article","topic":"AI"}'
 ```
 
-## Next Steps
+## Related Documents
 
-- Review [Backend Architecture](backend.md) for implementation details
-- Check [Authentication Integration](../integrations/authentication.md) for auth setup
-- See [Setup Guide](../development/setup.md) for API testing
+- [Backend Architecture](backend-architecture.md) - Backend implementation details
+- [API Routing Map](api-routing-map.md) - API endpoint structure and routing
+- [Authentication Integration](../integrations/authentication.md) - Authentication setup
+- [Provider Integration](provider-integration.md) - AI provider integration
+- [Setup Guide](../development/setup.md) - Development environment setup

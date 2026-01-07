@@ -1,5 +1,11 @@
 # Authentication System Integration
 
+**Description:** Documents the full-featured authentication system built with FastAPI (Python) backend and React frontend, including JWT-based authentication, OAuth2 social logins, email verification, and password reset functionality.  
+**Last Updated:** 2026-01-07  
+**Status:** Stable
+
+---
+
 ## Overview
 
 The Nova‑XFinity AI Article Writer uses a full-featured authentication system built with FastAPI (Python) backend and React frontend. The system includes JWT-based authentication with refresh tokens, OAuth2 social logins, email verification, and password reset functionality.
@@ -322,8 +328,10 @@ The admin user is automatically created on application startup:
 
 Admin creation happens in `backend-auth/app/core/init_admin_user.py` and runs on every application startup.
 
-## Next Steps
+## Related Documents
 
-- Review [Backend Architecture](../architecture/backend.md) for implementation details
-- Check [Email Integration](email-autoresponders.md) for email templates
-- See [API Documentation](../architecture/api.md) for endpoint details
+- [Auth System](../architecture/auth-system.md) - Authentication system architecture
+- [RBAC](../architecture/rbac.md) - Role-based access control implementation
+- [Email Integration](email-autoresponders.md) - Email service and templates
+- [Backend Architecture](../architecture/backend-architecture.md) - Backend implementation details
+- [Troubleshooting: OAuth Fixes](../troubleshooting/OAUTH_FIXES_MASTER_LOG.md) - OAuth and authentication fixes
