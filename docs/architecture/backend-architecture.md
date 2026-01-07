@@ -199,3 +199,4 @@ backend/
 - [API Documentation](api.md) - API endpoints and specifications
 - [Auth System](auth-system.md) - Authentication system architecture
 - [Provider Integration](provider-integration.md) - AI provider integration patterns
+- [Docker Containerization System](../development/docker-containerization-system.md) - Docker-based service orchestration and development workflow

@@ -485,3 +485,4 @@ Once services are running, you can test:
 - [Backend Architecture](../architecture/backend-architecture.md) - Backend system architecture
 - [Frontend Architecture](../architecture/frontend-architecture.md) - Frontend system architecture
 - [Deployment Process](deployment-process.md) - Production deployment guide
+- [Docker Containerization System](docker-containerization-system.md) - Docker-based service orchestration and development workflow
