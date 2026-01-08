@@ -1,0 +1,353 @@
+/**
+ * Finity AI Setup Wizard Styles
+ */
+
+/* Wizard Container */
+.finity-wizard-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Wizard Header */
+.finity-wizard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+}
+
+.finity-wizard-header h1 {
+    color: #fff;
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.finity-wizard-header .description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Progress Indicator */
+.finity-wizard-progress {
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 30px;
+}
+
+.finity-wizard-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.finity-wizard-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ddd;
+    z-index: 0;
+}
+
+.finity-wizard-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+.finity-wizard-step .step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.finity-wizard-step .step-label {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    font-weight: 500;
+}
+
+.finity-wizard-step.active .step-number {
+    background: #667eea;
+    border-color: #667eea;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.finity-wizard-step.completed .step-number {
+    background: #46b450;
+    border-color: #46b450;
+    color: #fff;
+}
+
+.finity-wizard-step.completed .step-number::after {
+    content: '✓';
+    font-size: 20px;
+}
+
+.finity-wizard-step.completed .step-label {
+    color: #46b450;
+}
+
+/* Wizard Form */
+.finity-wizard-form {
+    padding: 30px;
+}
+
+.finity-wizard-step-content {
+    min-height: 400px;
+}
+
+.finity-wizard-step-content h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+    color: #23282d;
+}
+
+.finity-wizard-step-content .description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.finity-wizard-step-content .form-table {
+    margin-top: 20px;
+}
+
+.finity-wizard-step-content .form-table th {
+    width: 200px;
+    padding: 20px 10px 20px 0;
+    vertical-align: middle;
+}
+
+.finity-wizard-step-content .form-table td {
+    padding: 15px 10px;
+}
+
+/* Test Status */
+.test-status {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.test-status .success {
+    color: #46b450;
+}
+
+.test-status .error {
+    color: #dc3232;
+}
+
+/* Navigation Buttons */
+.finity-wizard-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: #f9f9f9;
+    border-top: 1px solid #ddd;
+    margin-top: 30px;
+}
+
+.finity-wizard-navigation .wizard-nav-right {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.finity-wizard-navigation .button {
+    min-width: 120px;
+    padding: 8px 16px;
+    height: auto;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.finity-wizard-navigation .button-primary {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.finity-wizard-navigation .button-primary:hover {
+    background: #5568d3;
+    border-color: #5568d3;
+}
+
+/* Complete Step */
+.finity-wizard-complete {
+    text-align: center;
+    padding: 60px 30px;
+}
+
+.finity-wizard-complete .complete-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #46b450;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0 auto 30px;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.finity-wizard-complete h2 {
+    font-size: 32px;
+    color: #23282d;
+    margin-bottom: 15px;
+}
+
+.finity-wizard-complete p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.finity-wizard-complete .button {
+    margin: 5px;
+    min-width: 200px;
+    padding: 12px 24px;
+    font-size: 14px;
+}
+
+/* Step Validation */
+.wizard-step-validation {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 4px;
+}
+
+.wizard-step-validation .error-message {
+    color: #dc3232;
+    font-weight: 500;
+}
+
+/* Loading States */
+.finity-wizard-form .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .finity-wizard-container {
+        margin: 10px;
+        border-radius: 0;
+    }
+    
+    .finity-wizard-header {
+        padding: 20px;
+    }
+    
+    .finity-wizard-header h1 {
+        font-size: 24px;
+    }
+    
+    .finity-wizard-steps {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .finity-wizard-steps::before {
+        display: none;
+    }
+    
+    .finity-wizard-step {
+        width: 100%;
+        flex-direction: row;
+        gap: 15px;
+    }
+    
+    .finity-wizard-step .step-number {
+        flex-shrink: 0;
+    }
+    
+    .finity-wizard-form {
+        padding: 20px;
+    }
+    
+    .finity-wizard-step-content .form-table th,
+    .finity-wizard-step-content .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+    
+    .finity-wizard-step-content .form-table th {
+        padding-bottom: 5px;
+    }
+    
+    .finity-wizard-navigation {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .finity-wizard-navigation .wizard-nav-right {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .finity-wizard-navigation .button {
+        width: 100%;
+    }
+}
+
+/* Animations */
+.finity-wizard-step-content {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import api from '../services/api';
+import api from '../frontend/src/services/api.js';
 
 const AuthContext = createContext();
 
@@ -246,6 +246,9 @@ export const AuthProvider = ({ children }) => {
     window.location.href = `${apiUrl}/auth/${provider}`;
   };
 
+  // Derived value: check if user is admin
+  const isAdmin = user?.role === 'admin';
+
   return React.createElement(
     AuthContext.Provider,
     {
@@ -253,6 +256,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         isAuthenticated,
+        isAdmin,
         login,
         register,
         logout,

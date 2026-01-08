@@ -27,6 +27,8 @@ model User {
   mediaAssets   MediaAsset[]
   subscription  Subscription?
   usage         Usage[]
+  tokenUsages   TokenUsage[]
+  platformApiKey PlatformApiKey?
   
   @@map("users")
 }
@@ -227,4 +229,41 @@ model Usage {
 enum UsagePeriod {
   MONTHLY
   YEARLY
+}
+
+model TokenUsage {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  action      String   // Action type (e.g., 'content_generation', 'research', 'image_generation')
+  provider    String?  // AI provider (e.g., 'openai', 'gemini')
+  tokensUsed  Int      @map("tokens_used")
+  metadata    Json?    // Additional metadata (source, request details, etc.)
+  source      String   @default("wordpress") // Source of usage ('wordpress', 'platform', 'api')
+  createdAt   DateTime @default(now()) @map("created_at")
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([createdAt])
+  @@index([action])
+  @@index([source])
+  @@map("token_usage")
+}
+
+model PlatformApiKey {
+  id          String   @id @default(uuid())
+  userId      String   @unique @map("user_id")
+  apiKey      String   @unique @map("api_key")
+  name        String?  // Optional name for the key
+  isActive    Boolean  @default(true) @map("is_active")
+  lastUsedAt  DateTime? @map("last_used_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([apiKey])
+  @@index([userId])
+  @@index([isActive])
+  @@map("platform_api_keys")
 }

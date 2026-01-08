@@ -948,7 +948,7 @@ npx jscodeshift -t codemods/migrate-imports.js src/
 
 ## TODO / Roadmap
 
-### Short-Term (Q1 2026)
+### Short-Term
 
 - [ ] **Path Alias Migration**
   - [ ] Configure all planned aliases in `vite.config.ts`
@@ -969,7 +969,7 @@ npx jscodeshift -t codemods/migrate-imports.js src/
   - [ ] Update service imports
   - [ ] Remove legacy `services/` directory
 
-### Medium-Term (Q2 2026)
+### Medium-Term
 
 - [ ] **Feature-Based Organization**
   - [ ] Complete feature module structure
@@ -989,7 +989,7 @@ npx jscodeshift -t codemods/migrate-imports.js src/
   - [ ] Add CI/CD checks
   - [ ] Document migration tools
 
-### Long-Term (Q3-Q4 2026)
+### Long-Term
 
 - [ ] **Monorepo Adoption**
   - [ ] Evaluate monorepo tools

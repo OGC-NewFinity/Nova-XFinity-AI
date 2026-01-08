@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
       },
       resolve: {
         alias: {
-          '@': path.resolve(__dirname, '.'),
+          '@': path.resolve(__dirname, 'frontend/src'),
         },
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
       }

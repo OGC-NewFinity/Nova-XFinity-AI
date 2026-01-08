@@ -1019,7 +1019,7 @@ Response: 200 OK
 
 ## TODO / Planned Improvements
 
-### Short-Term (Q1 2026)
+### Short-Term
 
 - [ ] **Stripe Webhook Implementation**
   - Complete Stripe webhook signature verification
@@ -1037,7 +1037,7 @@ Response: 200 OK
   - Log aggregation service integration
   - Error tracking (Sentry, etc.)
 
-### Medium-Term (Q2 2026)
+### Medium-Term
 
 - [ ] **Idempotency Tracking**
   - Store processed event IDs
@@ -1059,7 +1059,7 @@ Response: 200 OK
   - IP whitelist configuration
   - Enhanced security
 
-### Long-Term (Q3-Q4 2026)
+### Long-Term
 
 - [ ] **Additional Providers**
   - Support for other payment providers

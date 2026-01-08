@@ -851,19 +851,19 @@ contract NovaStaking is ReentrancyGuard {
 
 ### Implementation Roadmap
 
-**Phase 1: Foundation (Q2 2026)**
+**Phase 1: Foundation**
 - [ ] Design token smart contract
 - [ ] Deploy testnet version
 - [ ] Wallet connection integration
 - [ ] Basic bridging mechanism
 
-**Phase 2: Governance (Q3 2026)**
+**Phase 2: Governance**
 - [ ] Staking contract deployment
 - [ ] Governance voting system
 - [ ] Reward distribution mechanism
 - [ ] UI for staking and voting
 
-**Phase 3: Trading (Q4 2026)**
+**Phase 3: Trading**
 - [ ] DEX liquidity provision
 - [ ] Trading interface integration
 - [ ] Market-making strategies

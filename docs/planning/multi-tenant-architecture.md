@@ -1388,4 +1388,4 @@ export const createArticle = async (userId, data) => {
 
 **Last Updated:** 2026-01-07  
 **Status:** Draft  
-**Next Review:** Q2 2026 (after reaching 1,000 active tenants)
+**Next Review:** Planned (after reaching 1,000 active tenants)

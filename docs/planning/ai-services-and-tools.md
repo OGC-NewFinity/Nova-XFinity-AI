@@ -1140,7 +1140,7 @@ The token economy system maps operations to token costs:
 - UI component: `components/common/Summarizer.js`
 - Integration: Writer component, Chrome extension
 
-**Estimated Release:** Q2 2026
+**Status:** Planned
 
 ---
 
@@ -1162,7 +1162,7 @@ The token economy system maps operations to token costs:
 - UI component: `components/common/CodeGenerator.js`
 - Integration: Standalone tool, Writer component integration
 
-**Estimated Release:** Q3 2026
+**Status:** Planned
 
 ---
 
@@ -1184,7 +1184,7 @@ The token economy system maps operations to token costs:
 - UI component: Enhanced `components/Research.js`
 - Integration: Research module
 
-**Estimated Release:** Q2 2026
+**Status:** Planned
 
 ---
 
@@ -1207,7 +1207,7 @@ The token economy system maps operations to token costs:
 - UI component: Enhanced `components/MediaHub.js`
 - Integration: MediaHub edit mode
 
-**Estimated Release:** Q3 2026
+**Status:** Planned
 
 ---
 
@@ -1229,7 +1229,7 @@ The token economy system maps operations to token costs:
 - UI component: `components/common/Translator.js`
 - Integration: Writer component, API endpoint
 
-**Estimated Release:** Q4 2026
+**Status:** Planned
 
 ---
 

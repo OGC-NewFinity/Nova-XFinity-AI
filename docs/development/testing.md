@@ -1142,7 +1142,7 @@ jobs:
 
 ## TODO / Planned Improvements
 
-### Short-term (Q1 2026)
+### Short-term
 
 - [ ] Set up Vitest for frontend testing
 - [ ] Add React Testing Library configuration
@@ -1151,7 +1151,7 @@ jobs:
 - [ ] Set up Playwright for E2E testing
 - [ ] Add CI/CD test workflows
 
-### Medium-term (Q2 2026)
+### Medium-term
 
 - [ ] Achieve 80% test coverage for backend
 - [ ] Achieve 70% test coverage for frontend
@@ -1160,7 +1160,7 @@ jobs:
 - [ ] Add performance testing
 - [ ] Create testing documentation for contributors
 
-### Long-term (Q3-Q4 2026)
+### Long-term
 
 - [ ] Implement mutation testing
 - [ ] Add contract testing for API

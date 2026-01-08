@@ -1,7 +1,7 @@
 import React from 'react';
 import htm from 'htm';
-import { useQuota } from '../../hooks/useQuota.js';
-import { checkFeatureQuota, getQuotaWarningMessage } from '../../utils/quotaChecker.js';
+import { useQuota } from '@/hooks';
+import { checkFeatureQuota, getQuotaWarningMessage } from '@/utils';
 
 const html = htm.bind(React.createElement);
 

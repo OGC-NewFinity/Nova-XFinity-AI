@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import htm from 'htm';
 import SubscriptionCard from './SubscriptionCard.js';
-import UsageStats from './UsageStats.js';
-import PlanComparison from './PlanComparison.js';
-import UpgradeModal from './UpgradeModal.js';
+import { UsageStats, PlanComparison, UpgradeModal } from '@/features/account';
 import PlanBadge from '../common/PlanBadge.js';
 
 const html = htm.bind(React.createElement);

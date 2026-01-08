@@ -53,7 +53,7 @@
 
 ## 🗓️ Target Beta Launch
 
-**Q1 2026**
+**Planned**
 
 Once all boxes are checked, Nova‑XFinity AI will be ready for public Beta release.
 

@@ -21,6 +21,14 @@ npm run dev
 
 See [`docs/development/setup.md`](docs/development/setup.md) for Docker setup.
 
+### Building for Production
+
+```bash
+npm run build
+```
+
+This generates production-ready assets in the `dist/` folder (auto-generated, excluded from git).
+
 ---
 
 ## 📁 Monorepo Structure

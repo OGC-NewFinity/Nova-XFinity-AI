@@ -750,7 +750,7 @@ model Usage {
 
 ## TODO / Planned Enhancements
 
-### Short-Term (Q1 2026)
+### Short-Term
 
 - [ ] **Stripe Webhook Implementation**
   - Complete Stripe webhook signature verification
@@ -773,7 +773,7 @@ model Usage {
   - Custom receipt templates
   - Receipt download from account page
 
-### Medium-Term (Q2 2026)
+### Medium-Term
 
 - [ ] **Tax Management**
   - Custom tax calculation engine
@@ -797,7 +797,7 @@ model Usage {
   - Manual sync via admin panel
   - Sync status monitoring
 
-### Long-Term (Q3-Q4 2026)
+### Long-Term
 
 - [ ] **Additional Payment Providers**
   - Bank transfer support

@@ -1,36 +1,37 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import htm from 'htm';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.js';
+import { ThemeProvider } from '@/context/ThemeContext.js';
+import { SettingsProvider } from '@/context/SettingsContext.js';
 import Sidebar from './components/Sidebar.js';
-import Dashboard from './components/Dashboard.js';
-import Writer from './components/writer/Writer.js';
-import Research from './components/Research.js';
-import MediaHub from './components/MediaHub.js';
-import AccountPage from './components/Account/AccountPage.js';
-import SettingsPanel from './components/Settings/SettingsPanel.js';
+import Loading from './components/common/Loading.js';
 import NotificationManager from './components/common/Notification.js';
-import Login from './pages/auth/Login.js';
-import Register from './pages/auth/Register.js';
-import ForgotPassword from './pages/auth/ForgotPassword.js';
-import ResetPassword from './pages/auth/ResetPassword.js';
-import VerifyEmail from './pages/auth/VerifyEmail.js';
-import Subscription from './pages/Subscription.js';
-import AdminDashboard from './pages/AdminDashboard.js';
+import { Login, Register, ForgotPassword, ResetPassword, VerifyEmail, Unauthorized } from '@/features/auth';
 import LandingPage from './pages/LandingPage/LandingPage.jsx';
+
+// Lazy load route-level components
+const Dashboard = lazy(() => import('@/features/dashboard/Dashboard.js'));
+const Writer = lazy(() => import('@/features/writer').then(module => ({ default: module.WriterMain })));
+const Research = lazy(() => import('./components/Research.js'));
+const MediaHub = lazy(() => import('@/features/media').then(module => ({ default: module.MediaHubMain })));
+const SettingsPanel = lazy(() => import('./components/Settings/SettingsPanel.js'));
+const AdminDashboard = lazy(() => import('@/features/admin-dashboard/AdminDashboard.js'));
+const AccountPage = lazy(() => import('./components/Account/AccountPage.js'));
+const Subscription = lazy(() => import('@/features/account').then(module => ({ default: module.Subscription })));
 
 const html = htm.bind(React.createElement);
 
-// Private Route Component
-const PrivateRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
+// Protected Route Component - handles both regular and admin-only routes
+const ProtectedRoute = ({ children, adminOnly = false }) => {
+  const { isAuthenticated, isAdmin, loading } = useAuth();
   const [checkingCookie, setCheckingCookie] = React.useState(false);
 
   // Debug logging
   React.useEffect(() => {
-    console.log('PrivateRoute - isAuthenticated:', isAuthenticated, 'loading:', loading);
-  }, [isAuthenticated, loading]);
+    console.log('ProtectedRoute - isAuthenticated:', isAuthenticated, 'isAdmin:', isAdmin, 'adminOnly:', adminOnly, 'loading:', loading);
+  }, [isAuthenticated, isAdmin, adminOnly, loading]);
 
   // Fallback: Check cookie directly and trigger auth re-check if needed
   const { checkAuth } = useAuth();
@@ -38,7 +39,7 @@ const PrivateRoute = ({ children }) => {
     if (!isAuthenticated && !loading && !checkingCookie) {
       const token = document.cookie.split('; ').find(row => row.startsWith('access_token='));
       if (token) {
-        console.log('PrivateRoute - Found token in cookie but auth state not updated, re-checking auth...');
+        console.log('ProtectedRoute - Found token in cookie but auth state not updated, re-checking auth...');
         setCheckingCookie(true);
         // Trigger auth re-check and wait for it to complete
         checkAuth().finally(() => {
@@ -55,17 +56,17 @@ const PrivateRoute = ({ children }) => {
     return React.createElement('div', { className: 'flex items-center justify-center min-h-screen' }, 'Loading...');
   }
 
-  // Check cookie as fallback if state hasn't updated
+  // Check if user is authenticated
   const hasToken = document.cookie.split('; ').find(row => row.startsWith('access_token='));
   
   if (!isAuthenticated && !hasToken) {
-    console.log('PrivateRoute - Not authenticated and no token, redirecting to login');
+    console.log('ProtectedRoute - Not authenticated and no token, redirecting to login');
     return React.createElement(Navigate, { to: "/login", replace: true });
   }
 
   // If we have a token but auth state isn't updated yet, show loading and keep checking
   if (!isAuthenticated && hasToken) {
-    console.log('PrivateRoute - Token exists but auth state not updated, showing loading and re-checking...');
+    console.log('ProtectedRoute - Token exists but auth state not updated, showing loading and re-checking...');
     // Trigger a re-check if not already checking
     if (!checkingCookie) {
       setCheckingCookie(true);
@@ -78,34 +79,21 @@ const PrivateRoute = ({ children }) => {
     return React.createElement('div', { className: 'flex items-center justify-center min-h-screen' }, 'Authenticating...');
   }
 
-  // If authenticated, render children
+  // Check admin-only requirement
+  if (adminOnly && !isAdmin) {
+    console.log('ProtectedRoute - Admin access required but user is not admin, redirecting to unauthorized');
+    return React.createElement(Navigate, { to: "/unauthorized", replace: true });
+  }
+
+  // If authenticated (and admin if required), render children
   if (isAuthenticated) {
-    console.log('PrivateRoute - User authenticated, rendering protected content');
+    console.log('ProtectedRoute - User authenticated, rendering protected content');
     return children;
   }
 
   // Fallback: should not reach here, but just in case
-  console.log('PrivateRoute - Not authenticated, redirecting to login');
+  console.log('ProtectedRoute - Not authenticated, redirecting to login');
   return React.createElement(Navigate, { to: "/login", replace: true });
-};
-
-// Admin Route Component - requires authentication and admin role
-const AdminRoute = ({ children }) => {
-  const { isAuthenticated, user, loading } = useAuth();
-
-  if (loading) {
-    return React.createElement('div', { className: 'flex items-center justify-center min-h-screen' }, 'Loading...');
-  }
-
-  if (!isAuthenticated) {
-    return React.createElement(Navigate, { to: "/login", replace: true });
-  }
-
-  if (user?.role !== 'admin') {
-    return React.createElement(Navigate, { to: "/dashboard", replace: true });
-  }
-
-  return children;
 };
 
 // Main App Content (protected)
@@ -134,14 +122,38 @@ const AppContent = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'dashboard': return html`<${Dashboard} />`;
-      case 'writer': return html`<${Writer} settings=${settings} />`;
-      case 'research': return html`<${Research} />`;
-      case 'mediahub': return html`<${MediaHub} />`;
-      case 'account': return html`<${AccountPage} />`;
-      case 'subscription': return html`<${Subscription} />`;
-      case 'settings': return html`<${SettingsPanel} settings=${settings} onSettingsChange=${setSettings} onSave=${handleSaveSettings} />`;
-      default: return html`<${Dashboard} />`;
+      case 'dashboard': 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(Dashboard)
+        );
+      case 'writer': 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(Writer, { settings })
+        );
+      case 'research': 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(Research)
+        );
+      case 'mediahub': 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(MediaHub)
+        );
+      case 'account': 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(AccountPage)
+        );
+      case 'subscription': 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(Subscription)
+        );
+      case 'settings': 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(SettingsPanel, { settings, onSettingsChange: setSettings, onSave: handleSaveSettings })
+        );
+      default: 
+        return React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+          React.createElement(Dashboard)
+        );
     }
   };
 
@@ -160,53 +172,68 @@ const AppContent = () => {
 
 // Main App Component with Routing
 const App = () => {
-  return React.createElement(AuthProvider, null,
-    React.createElement(Router, null,
-      React.createElement(Routes, null,
-        React.createElement(Route, { path: "/login", element: React.createElement(Login) }),
-        React.createElement(Route, { path: "/register", element: React.createElement(Register) }),
-        React.createElement(Route, { path: "/forgot-password", element: React.createElement(ForgotPassword) }),
-        React.createElement(Route, { path: "/reset-password", element: React.createElement(ResetPassword) }),
-        React.createElement(Route, { path: "/verify-email", element: React.createElement(VerifyEmail) }),
-        React.createElement(Route, {
-          path: "/subscription",
-          element: React.createElement(PrivateRoute, null, React.createElement(Subscription))
-        }),
-        React.createElement(Route, {
-          path: "/subscription/confirm",
-          element: React.createElement(PrivateRoute, null, React.createElement(Subscription))
-        }),
-        React.createElement(Route, {
-          path: "/admin",
-          element: React.createElement(AdminRoute, null, 
-            React.createElement('div', { className: 'min-h-screen bg-gray-50 p-8 lg:p-12' },
-              React.createElement('div', { className: 'max-w-7xl mx-auto' },
-                React.createElement(AdminDashboard)
+  return React.createElement(ThemeProvider, null,
+    React.createElement(SettingsProvider, null,
+      React.createElement(AuthProvider, null,
+        React.createElement(Router, null,
+          React.createElement(Routes, null,
+            React.createElement(Route, { path: "/login", element: React.createElement(Login) }),
+            React.createElement(Route, { path: "/register", element: React.createElement(Register) }),
+            React.createElement(Route, { path: "/forgot-password", element: React.createElement(ForgotPassword) }),
+            React.createElement(Route, { path: "/reset-password", element: React.createElement(ResetPassword) }),
+            React.createElement(Route, { path: "/verify-email", element: React.createElement(VerifyEmail) }),
+            React.createElement(Route, { path: "/unauthorized", element: React.createElement(Unauthorized) }),
+            React.createElement(Route, {
+              path: "/subscription",
+              element: React.createElement(ProtectedRoute, null, 
+                React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+                  React.createElement(Subscription)
+                )
               )
-            )
+            }),
+            React.createElement(Route, {
+              path: "/subscription/confirm",
+              element: React.createElement(ProtectedRoute, null, 
+                React.createElement(Suspense, { fallback: React.createElement(Loading) }, 
+                  React.createElement(Subscription)
+                )
+              )
+            }),
+            React.createElement(Route, {
+              path: "/admin",
+              element: React.createElement(ProtectedRoute, { adminOnly: true }, 
+                React.createElement(Suspense, { fallback: React.createElement(Loading) },
+                  React.createElement('div', { className: 'min-h-screen bg-gray-50 p-8 lg:p-12' },
+                    React.createElement('div', { className: 'max-w-7xl mx-auto' },
+                      React.createElement(AdminDashboard)
+                    )
+                  )
+                )
+              )
+            }),
+            React.createElement(Route, {
+              path: "/dashboard",
+              element: React.createElement(ProtectedRoute, null, React.createElement(AppContent))
+            }),
+            React.createElement(Route, {
+              path: "/",
+              element: React.createElement(() => {
+                const { isAuthenticated, loading } = useAuth();
+                if (loading) {
+                  return React.createElement('div', { className: 'flex items-center justify-center min-h-screen' }, 'Loading...');
+                }
+                if (isAuthenticated) {
+                  return React.createElement(Navigate, { to: "/dashboard", replace: true });
+                }
+                return React.createElement(LandingPage);
+              })
+            }),
+            React.createElement(Route, {
+              path: "/*",
+              element: React.createElement(ProtectedRoute, null, React.createElement(AppContent))
+            })
           )
-        }),
-        React.createElement(Route, {
-          path: "/dashboard",
-          element: React.createElement(PrivateRoute, null, React.createElement(AppContent))
-        }),
-        React.createElement(Route, {
-          path: "/",
-          element: React.createElement(() => {
-            const { isAuthenticated, loading } = useAuth();
-            if (loading) {
-              return React.createElement('div', { className: 'flex items-center justify-center min-h-screen' }, 'Loading...');
-            }
-            if (isAuthenticated) {
-              return React.createElement(Navigate, { to: "/dashboard", replace: true });
-            }
-            return React.createElement(LandingPage);
-          })
-        }),
-        React.createElement(Route, {
-          path: "/*",
-          element: React.createElement(PrivateRoute, null, React.createElement(AppContent))
-        })
+        )
       )
     )
   );

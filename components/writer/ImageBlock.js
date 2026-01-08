@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import htm from 'htm';
-import { generateImage, editImage } from '../../services/geminiService.js';
+import { generateImage, editImage } from '../../frontend/src/services/geminiMediaService.js';
 
 const html = htm.bind(React.createElement);
 

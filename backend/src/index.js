@@ -24,6 +24,12 @@ app.use(cors({
   credentials: true
 }));
 app.use(cookieParser()); // Parse cookies from request
+
+// Stripe webhook needs raw body for signature verification
+// Apply raw body parser only to Stripe webhook route
+app.use('/api/webhooks/stripe', express.raw({ type: 'application/json' }));
+
+// JSON body parser for all other routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,12 +41,14 @@ app.get('/health', (req, res) => {
 // API Routes
 import subscriptionRoutes from './routes/subscription.routes.js';
 import webhooksRoutes from './routes/webhooks.routes.js';
+import tokenUsageRoutes from './routes/tokenUsage.routes.js';
 import { articleRoutes } from './features/article/index.js';
 import { researchRoutes } from './features/research/index.js';
 import { mediaRoutes } from './features/media/index.js';
 
 app.use('/api/subscription', subscriptionRoutes);
 app.use('/api/webhooks', webhooksRoutes);
+app.use('/api/token-usage', tokenUsageRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/research', researchRoutes);

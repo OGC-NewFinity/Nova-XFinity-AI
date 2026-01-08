@@ -1,12 +1,12 @@
 # Nova‑XFinity AI — 2026 Roadmap
 
-**Description:** Outlines the planned development phases and major milestones for Nova‑XFinity AI across Q1–Q3 of 2026.  
+**Description:** Outlines the planned development phases and major milestones for Nova‑XFinity AI.  
 **Last Updated:** 2026-01-07  
 **Status:** Stable
 
 ---
 
-## 🚀 Q1 2026 — Beta Launch
+## 🚀 Beta Launch
 
 ### Product Goals
 
@@ -25,7 +25,7 @@
 
 ---
 
-## 🧪 Q2 2026 — Testing & Community Growth
+## 🧪 Testing & Community Growth
 
 ### Feature Expansion
 
@@ -48,7 +48,7 @@
 
 ---
 
-## 🧠 Q3 2026 — Pro Features & Admin Tools
+## 🧠 Pro Features & Admin Tools
 
 ### Advanced Platform Tools
 

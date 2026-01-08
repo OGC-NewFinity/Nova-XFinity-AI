@@ -1077,7 +1077,7 @@ app.use((req, res, next) => {
 
 ## TODO / Planned Improvements
 
-### Short-term (Q1 2026)
+### Short-term
 
 - [ ] Implement rate limiting on all endpoints
 - [ ] Add security headers middleware
@@ -1088,7 +1088,7 @@ app.use((req, res, next) => {
 - [ ] Add CAPTCHA for login after failures
 - [ ] Implement account lockout after failed attempts
 
-### Medium-term (Q2-Q3 2026)
+### Medium-term
 
 - [ ] Implement fine-grained permissions system
 - [ ] Add security audit logging dashboard
@@ -1099,7 +1099,7 @@ app.use((req, res, next) => {
 - [ ] Implement security scanning in CI/CD
 - [ ] Add penetration testing schedule
 
-### Long-term (Q4 2026+)
+### Long-term
 
 - [ ] Implement zero-trust architecture
 - [ ] Add advanced threat detection

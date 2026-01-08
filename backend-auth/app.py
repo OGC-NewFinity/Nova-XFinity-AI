@@ -41,6 +41,10 @@ async def seed_dev_users():
                     "email": "artcrow88@gmail.com",
                     "password": "Admin(2077).COM",
                 },
+                {
+                    "email": "ogcnewfinity@gmail.com",
+                    "password": "FiniTy-2026-Data.CoM",
+                },
             ]
 
             for user_data in dev_users:
@@ -61,7 +65,7 @@ async def seed_dev_users():
                     hashed_password=hashed_pw,
                     is_active=True,
                     is_verified=True,
-                    is_superuser=False,
+                    is_superuser=True,
                 )
                 session.add(new_user)
                 await session.commit()

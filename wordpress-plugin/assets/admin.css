@@ -1,8 +1,199 @@
-/* Nova‑XFinity AI Admin Styles */
+/* Finity AI Admin Styles */
 
+/* Settings Page Container */
+.finity-ai-settings-page {
+    max-width: 1200px;
+}
+
+/* Form Fields Styling */
+.finity-ai-settings-page .form-table th {
+    width: 200px;
+    padding: 20px 10px 20px 0;
+}
+
+.finity-ai-settings-page .form-table td {
+    padding: 15px 10px;
+}
+
+/* Password Input Fields for API Keys */
+.finity-ai-settings-page input[type="password"] {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+}
+
+/* Button Styling */
+.finity-ai-settings-page .button {
+    transition: all 0.2s ease;
+}
+
+.finity-ai-settings-page .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.finity-ai-settings-page .button-primary {
+    background: #2271b1;
+    border-color: #2271b1;
+}
+
+.finity-ai-settings-page .button-primary:hover {
+    background: #135e96;
+    border-color: #135e96;
+}
+
+/* Content Generation Section */
+#finity-ai-generator {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    margin-top: 20px;
+}
+
+#finity-ai-generator textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#finity-ai-generator select {
+    min-width: 200px;
+}
+
+/* Generation Result Display */
+#generation-result {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#generation-result h3 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#generation-output {
+    line-height: 1.6;
+    color: #333;
+}
+
+#generation-output h1,
+#generation-output h2,
+#generation-output h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #23282d;
+}
+
+#generation-output h1 {
+    font-size: 2em;
+    border-bottom: 2px solid #2271b1;
+    padding-bottom: 10px;
+}
+
+#generation-output h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+#generation-output h3 {
+    font-size: 1.2em;
+}
+
+#generation-output p {
+    margin-bottom: 1em;
+}
+
+#generation-output strong {
+    font-weight: 600;
+    color: #23282d;
+}
+
+#generation-output em {
+    font-style: italic;
+}
+
+/* Status Messages */
+#generation-status {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* API Key Test Buttons */
+#test-openai-key,
+#test-gemini-key {
+    margin-left: 10px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .finity-ai-settings-page .form-table th,
+    .finity-ai-settings-page .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+    
+    .finity-ai-settings-page .form-table th {
+        padding-bottom: 5px;
+    }
+    
+    #test-openai-key,
+    #test-gemini-key {
+        margin-left: 0;
+        margin-top: 10px;
+        display: block;
+        width: 100%;
+    }
+}
+
+/* Loading Spinner */
+.finity-ai-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #2271b1;
+    border-radius: 50%;
+    animation: finity-ai-spin 1s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes finity-ai-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success/Error Messages */
+.finity-ai-message {
+    padding: 10px 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+    border-left: 4px solid;
+}
+
+.finity-ai-message.success {
+    background: #ecf7ed;
+    border-color: #46b450;
+    color: #155724;
+}
+
+.finity-ai-message.error {
+    background: #fbeaea;
+    border-color: #dc3232;
+    color: #721c24;
+}
+
+/* Iframe Styling (for main plugin page if used) */
 #finity-ai-iframe {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    border-radius: 8px;
 }
 
 #finity-ai-iframe:hover {

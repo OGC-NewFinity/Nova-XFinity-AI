@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import htm from 'htm';
-import { generateCTA } from '../../services/geminiService.js';
+import { generateCTA } from '../../frontend/src/services/geminiArticleService.js';
 
 const html = htm.bind(React.createElement);
 

@@ -144,7 +144,7 @@ Nova-XFinity AI is an AI-powered content generation platform that delivers SEO-o
 * Compress and optimize images/assets
 * Verify UI responsiveness and accessibility
 
-> 📅 Target: Beta Launch — Q1 2026
+> 📅 Target: Beta Launch
 
 ---
 

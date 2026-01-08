@@ -9,6 +9,7 @@ from fastapi_users.authentication import (
     JWTStrategy,
 )
 from fastapi_users.db import SQLAlchemyUserDatabase
+from fastapi_users.exceptions import InvalidPasswordException, UserNotExists
 
 from db import User, get_user_db
 from email_service import send_verification_email, send_password_reset_email, SMTP_CONFIG_VALID, EMAILS_ENABLED
@@ -22,6 +23,25 @@ JWT_LIFETIME_SECONDS = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", "30")) *
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     reset_password_token_secret = USERS_RESET_PASSWORD_TOKEN_SECRET
     verification_token_secret = USERS_VERIFICATION_TOKEN_SECRET
+
+    async def authenticate(self, credentials):
+        """Override authenticate to add detailed logging"""
+        try:
+            print(f"🔐 Authentication attempt for: {credentials.username if hasattr(credentials, 'username') else 'N/A'}")
+            user = await super().authenticate(credentials)
+            if user:
+                print(f"✅ Authentication successful for: {user.email}")
+                print(f"   User active: {user.is_active}, verified: {user.is_verified}, superuser: {user.is_superuser}")
+            return user
+        except UserNotExists:
+            print(f"❌ Authentication failed: User does not exist - {credentials.username if hasattr(credentials, 'username') else 'N/A'}")
+            raise
+        except InvalidPasswordException:
+            print(f"❌ Authentication failed: Invalid password for - {credentials.username if hasattr(credentials, 'username') else 'N/A'}")
+            raise
+        except Exception as e:
+            print(f"❌ Authentication error: {type(e).__name__} - {str(e)}")
+            raise
 
     async def on_after_register(self, user: User, request: Request | None = None):
         print(f"User {user.id} has registered.")

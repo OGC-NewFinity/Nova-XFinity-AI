@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import subscriptionApi from '../services/subscriptionApi.js';
-import { checkFeatureQuota } from '../utils/quotaChecker.js';
+import { checkFeatureQuota } from '../frontend/src/utils/index.js';
 
 /**
  * React hook for checking quota status
