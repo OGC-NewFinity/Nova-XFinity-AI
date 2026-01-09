@@ -1,48 +1,33 @@
 /**
  * AI Provider Manager
- * Manages multi-provider AI service configuration and fallback
+ * 
+ * ⚠️ DEPRECATED: This file is deprecated and should not be used.
+ * 
+ * SECURITY: This file previously attempted to access API keys from localStorage
+ * and process.env, which is a security risk. API keys should NEVER be accessed
+ * from frontend code or exposed to the client.
+ * 
+ * For backend usage, use: backend/src/services/ai/gemini.shared.js
+ * For frontend usage, use: frontend/src/utils/providerUtils.js (provider metadata only)
+ * 
+ * All AI provider API calls must go through backend endpoints that securely
+ * access API keys from environment variables.
  */
 
-const getSavedSettings = () => {
-  const saved = localStorage.getItem('nova_xfinity_settings');
-  return saved ? JSON.parse(saved) : { provider: 'gemini' };
-};
+console.warn('⚠️ DEPRECATED: services/ai/providerManager.js is deprecated. Do not use this file.');
 
+// Export stub functions that warn on usage
 export const getProviderConfig = () => {
-  const settings = getSavedSettings();
-  const provider = settings.provider || 'gemini';
-  
-  const configs = {
-    gemini: { 
-      key: process.env.API_KEY, 
-      baseUrl: 'https://generativelanguage.googleapis.com', 
-      model: 'gemini-3-pro-preview' 
-    },
-    openai: { 
-      key: settings.openaiKey, 
-      baseUrl: 'https://api.openai.com/v1/chat/completions', 
-      model: 'gpt-4o' 
-    },
-    anthropic: { 
-      key: settings.claudeKey, 
-      baseUrl: 'https://api.anthropic.com/v1/messages', 
-      model: 'claude-3-5-sonnet-latest' 
-    },
-    llama: { 
-      key: settings.llamaKey, 
-      baseUrl: 'https://api.groq.com/openai/v1/chat/completions', 
-      model: 'llama-3.3-70b-versatile' 
-    }
+  console.error('⚠️ SECURITY: getProviderConfig() from providerManager.js is deprecated. Use backend services instead.');
+  return {
+    id: 'gemini',
+    baseUrl: 'https://generativelanguage.googleapis.com',
+    model: 'gemini-3-pro-preview'
+    // SECURITY: No API key included
   };
-  
-  return { id: provider, ...configs[provider] };
 };
 
 export const getApiKey = () => {
-  try {
-    return process.env.API_KEY;
-  } catch (e) {
-    console.warn("API_KEY not found in process.env");
-    return null;
-  }
+  console.error('⚠️ SECURITY: getApiKey() from providerManager.js is deprecated. API keys are server-side only.');
+  return null;
 };

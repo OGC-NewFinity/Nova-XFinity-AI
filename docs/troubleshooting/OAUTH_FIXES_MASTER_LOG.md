@@ -642,6 +642,177 @@ BACKEND_CORS_ORIGINS=http://localhost:3000,http://localhost:5173
 
 ---
 
+## 🆕 New Security & Implementation Issues (2026-01-07 Analysis)
+
+### Critical Security Flaws
+
+#### Issue: Missing CSRF Protection (State Parameter Validation)
+- **Location:** `backend-auth/app.py:123-322` (OAuth callback handler)
+- **Severity:** HIGH
+- **Problem:** 
+  - `state` parameter is accepted in callback but never validated
+  - No state generation or storage during authorization request
+  - Discord OAuth service supports state parameter but it's never generated or verified
+  - Google OAuth doesn't generate state parameter
+- **Security Impact:** 
+  - Vulnerable to CSRF attacks
+  - Attackers could potentially trick users into authorizing attacker's account
+  - No protection against OAuth authorization code interception
+- **Evidence:**
+  ```python
+  # Line 128: state parameter accepted but never used
+  state: str | None = None,
+  # No validation of state parameter anywhere in callback
+  ```
+- **Suggested Fix:**
+  - Generate cryptographically secure state token during authorization
+  - Store state in session/cache with expiration (5-10 minutes)
+  - Validate state parameter in callback matches stored value
+  - Reject callbacks with missing or invalid state
+
+#### Issue: Token in URL Query Parameter
+- **Location:** `backend-auth/app.py:240, 302` (OAuth callback redirects)
+- **Severity:** HIGH
+- **Problem:**
+  - JWT tokens are passed in URL query parameter: `?token=...`
+  - Tokens can be logged in server logs, browser history, referrer headers
+  - Tokens exposed in URL are vulnerable to leakage
+- **Evidence:**
+  ```python
+  token_url = f"{FRONTEND_URL}/login?token={token}"
+  return RedirectResponse(url=token_url)
+  ```
+- **Security Impact:**
+  - Token leakage via browser history
+  - Token leakage via referrer headers to third-party sites
+  - Token exposure in server access logs
+  - Potential token theft if user shares URL
+- **Suggested Fix:**
+  - Use HTTP-only cookies for token storage (already implemented in frontend)
+  - Use POST request with token in body (not URL)
+  - Use short-lived authorization code that frontend exchanges for token
+  - Implement token exchange endpoint: `POST /auth/oauth/exchange` with code
+
+#### Issue: Missing Redirect URI Validation
+- **Location:** `backend-auth/app.py:97, 156` (Dynamic redirect URI construction)
+- **Severity:** MEDIUM
+- **Problem:**
+  - Redirect URI is constructed from `request.base_url` without validation
+  - No whitelist validation of redirect URIs
+  - Vulnerable to open redirect attacks if attacker controls base_url
+- **Evidence:**
+  ```python
+  redirect_uri = f"{str(request.base_url).rstrip('/')}/auth/{provider}/callback"
+  ```
+- **Security Impact:**
+  - Potential open redirect vulnerability
+  - If proxy/load balancer doesn't set proper headers, could redirect to attacker's domain
+- **Suggested Fix:**
+  - Maintain whitelist of allowed redirect URIs in environment variables
+  - Validate redirect URI against whitelist before use
+  - Use `X-Forwarded-Host` header validation for proxy environments
+  - Reject redirect URIs that don't match configured domains
+
+#### Issue: Missing Scope Validation
+- **Location:** `backend-auth/oauth.py:21-24` (Google OAuth), `discord_oauth.py:23` (Discord OAuth)
+- **Severity:** MEDIUM
+- **Problem:**
+  - Google OAuth doesn't explicitly request email scope
+  - Discord OAuth requests "identify email" but doesn't validate scope was granted
+  - No verification that required scopes were actually granted by user
+- **Evidence:**
+  ```python
+  # Google OAuth - no scope specified
+  oauth_clients["google"] = GoogleOAuth2(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET)
+  
+  # Discord OAuth - scope specified but not validated
+  scope: str = "identify email"
+  ```
+- **Security Impact:**
+  - May fail silently if email scope not granted
+  - User might authorize without email access, causing registration failure
+- **Suggested Fix:**
+  - Explicitly request required scopes: `scope="openid email profile"` for Google
+  - Validate that access token includes required scopes
+  - Handle gracefully if email scope denied (show error, don't crash)
+
+### Implementation Gaps
+
+#### Issue: Incomplete Error Handling
+- **Location:** `backend-auth/app.py:305-322` (OAuth callback exception handling)
+- **Severity:** MEDIUM
+- **Problem:**
+  - Generic exception handler catches all errors and returns generic `oauth_failed`
+  - No distinction between different error types
+  - No logging of actual error details for debugging
+  - Frontend receives generic error message
+- **Evidence:**
+  ```python
+  except Exception:
+      # Handle all other errors - do not expose error details
+      error_url = f"{FRONTEND_URL}/login?error=oauth_failed"
+      return RedirectResponse(url=error_url)
+  ```
+- **Impact:**
+  - Difficult to debug OAuth failures
+  - Users see unhelpful error messages
+  - Security issues might be hidden
+- **Suggested Fix:**
+  - Log full error details server-side
+  - Map specific exceptions to user-friendly error codes
+  - Return specific error codes: `invalid_code`, `token_exchange_failed`, `user_info_failed`, etc.
+
+#### Issue: Missing Rate Limiting
+- **Location:** OAuth endpoints (`/auth/{provider}`, `/auth/{provider}/callback`)
+- **Severity:** MEDIUM
+- **Problem:**
+  - No rate limiting on OAuth authorization or callback endpoints
+  - Vulnerable to brute force attacks on authorization codes
+  - No protection against OAuth flow abuse
+- **Impact:**
+  - Potential DoS via OAuth flow
+  - Brute force attempts on callback codes
+- **Suggested Fix:**
+  - Implement rate limiting: 10 OAuth attempts per IP per hour
+  - Rate limit callback endpoint: 5 attempts per IP per minute
+  - Use Redis or in-memory store for rate limiting
+
+#### Issue: Inconsistent Token Handling
+- **Location:** `context/AuthContext.js:28-30` (Frontend token parsing)
+- **Severity:** LOW
+- **Problem:**
+  - Frontend expects token format: `tokens=<token>` or `token=<token>`
+  - Backend sends `token=<token>` but frontend also checks for `tokens=<token>`
+  - Inconsistent token parameter name
+- **Evidence:**
+  ```javascript
+  const tokens = urlParams.get('tokens');
+  if (tokens) {
+    const [access_token] = decodeURIComponent(tokens).split('|');
+  ```
+- **Impact:**
+  - Minor confusion, but works due to fallback logic
+  - Could break if backend changes parameter name
+- **Suggested Fix:**
+  - Standardize on single parameter name: `token`
+  - Update both backend and frontend to use consistent naming
+
+### Missing Environment Variables
+
+#### Issue: OAuth Redirect URI Configuration
+- **Location:** `env.example:167`
+- **Severity:** LOW
+- **Problem:**
+  - `DISCORD_REDIRECT_URI` is optional but should be required for production
+  - No `GOOGLE_REDIRECT_URI` environment variable (uses dynamic construction)
+  - No validation that redirect URI matches configured value
+- **Suggested Fix:**
+  - Add `GOOGLE_REDIRECT_URI` to env.example
+  - Make redirect URIs required in production
+  - Add validation to ensure redirect URI matches configured value
+
+---
+
 ## Related Documents
 
 - [Common Issues](common-issues.md) - Frequently encountered issues and fixes

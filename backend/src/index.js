@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
@@ -7,6 +6,7 @@ import { dirname, join } from 'path';
 import { errorHandler } from './middleware/error.middleware.js';
 import { requestLogger } from './middleware/logger.middleware.js';
 import { validateEnv } from './config/env.js';
+import corsMiddleware from './middleware/cors.middleware.js';
 
 // Get the directory of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -24,12 +24,12 @@ validateEnv();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  credentials: true
-}));
-app.use(cookieParser()); // Parse cookies from request
+// CORS Middleware - Must be first to handle preflight requests
+// Secure CORS with origin validation, logging, and security headers
+app.use(corsMiddleware);
+
+// Cookie parser - Parse cookies from request
+app.use(cookieParser());
 
 // Stripe webhook needs raw body for signature verification
 // Apply raw body parser only to Stripe webhook route
@@ -57,6 +57,7 @@ import { statsRoutes } from './features/stats/index.js';
 import { articleRoutes } from './features/article/index.js';
 import { researchRoutes } from './features/research/index.js';
 import { mediaRoutes } from './features/media/index.js';
+import { adminSettingsRoutes } from './features/admin-settings/index.js';
 
 app.use('/api/subscription', subscriptionRoutes);
 app.use('/api/webhooks', webhooksRoutes);
@@ -67,9 +68,9 @@ app.use('/api/stats', statsRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/research', researchRoutes);
+app.use('/api/admin/settings', adminSettingsRoutes);
 // TODO: Import and mount other routes
 // app.use('/api/auth', authRoutes);
-// app.use('/api/settings', settingsRoutes);
 
 // Error handling
 app.use(errorHandler);

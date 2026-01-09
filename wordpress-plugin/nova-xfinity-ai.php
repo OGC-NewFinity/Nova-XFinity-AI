@@ -62,6 +62,13 @@ class Nova_XFinity_AI_SEO_Writer {
         // Initialize WordPress Settings API
         add_action('admin_init', array($this, 'register_settings'));
         
+        // Configure CORS for backend API access
+        add_filter('allowed_http_origins', array($this, 'allow_backend_api_origins'));
+        add_filter('http_request_args', array($this, 'add_cors_headers_to_requests'), 10, 2);
+        
+        // Add CORS headers to REST API responses
+        add_filter('rest_pre_serve_request', array($this, 'add_rest_api_cors_headers'), 0, 4);
+        
         // Register REST API routes for AI content generation
         add_action('rest_api_init', array($this, 'register_rest_routes'));
         
@@ -80,6 +87,165 @@ class Nova_XFinity_AI_SEO_Writer {
         
         // Hook into AI generation results for token tracking
         add_action('nova_xfinity_ai_generation_result', 'nova_xfinity_update_token_usage', 10, 2);
+    }
+    
+    /**
+     * Allow backend API origins for wp_remote_* requests
+     * 
+     * @param array $origins Allowed HTTP origins
+     * @return array Modified origins list
+     */
+    public function allow_backend_api_origins($origins) {
+        // Development origins
+        $dev_origins = array(
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'http://localhost:10000',
+            'http://127.0.0.1:3000',
+            'http://127.0.0.1:3001',
+            'http://127.0.0.1:10000',
+        );
+        
+        // Production origins
+        $production_origins = array(
+            'https://ogcnewfinity.com',
+            'https://www.ogcnewfinity.com',
+            'https://api.ogcnewfinity.com',
+        );
+        
+        // Merge allowed origins
+        $allowed_origins = array_merge(
+            is_array($origins) ? $origins : array(),
+            $dev_origins
+        );
+        
+        // Add production origins if not in local development
+        if (!defined('WP_DEBUG') || !WP_DEBUG || (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE !== 'local')) {
+            $allowed_origins = array_merge($allowed_origins, $production_origins);
+        }
+        
+        // Remove duplicates and return
+        return array_unique($allowed_origins);
+    }
+    
+    /**
+     * Add CORS headers to wp_remote_* requests
+     * 
+     * @param array $args Request arguments
+     * @param string $url Request URL
+     * @return array Modified request arguments
+     */
+    public function add_cors_headers_to_requests($args, $url) {
+        // Only add CORS headers for backend API requests
+        $backend_api_urls = array(
+            'ogcnewfinity.com',
+            'localhost:3001',
+            '127.0.0.1:3001',
+        );
+        
+        $is_backend_request = false;
+        foreach ($backend_api_urls as $backend_url) {
+            if (strpos($url, $backend_url) !== false) {
+                $is_backend_request = true;
+                break;
+            }
+        }
+        
+        if ($is_backend_request) {
+            // Ensure headers array exists
+            if (!isset($args['headers'])) {
+                $args['headers'] = array();
+            }
+            
+            // Add CORS headers if not already present
+            if (!isset($args['headers']['Origin'])) {
+                $args['headers']['Origin'] = home_url();
+            }
+            
+            // Add credentials header for authenticated requests
+            if (!isset($args['headers']['X-Requested-With'])) {
+                $args['headers']['X-Requested-With'] = 'XMLHttpRequest';
+            }
+        }
+        
+        return $args;
+    }
+    
+    /**
+     * Add CORS headers to REST API responses
+     * 
+     * @param bool $served Whether request was served
+     * @param WP_REST_Response $result Result to send to client
+     * @param WP_REST_Request $request Request used to generate response
+     * @param WP_REST_Server $server REST server instance
+     * @return bool Whether request was served
+     */
+    public function add_rest_api_cors_headers($served, $result, $request, $server) {
+        // Only add CORS headers for our plugin's REST endpoints
+        if (strpos($request->get_route(), '/nova-xfinity-ai/') === false) {
+            return $served;
+        }
+        
+        // Get request origin
+        $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+        
+        // Validate origin
+        $allowed_origins = $this->get_allowed_origins();
+        $is_allowed_origin = empty($origin) || in_array($origin, $allowed_origins);
+        
+        // Set CORS headers
+        if ($is_allowed_origin && !empty($origin)) {
+            header('Access-Control-Allow-Origin: ' . esc_url_raw($origin));
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+            header('Access-Control-Max-Age: 86400');
+        } elseif (!empty($origin)) {
+            // Log blocked origin for security monitoring
+            error_log(sprintf(
+                'Nova‑XFinity AI: Blocked CORS request from origin: %s',
+                esc_html($origin)
+            ));
+        }
+        
+        // Handle preflight OPTIONS request
+        if ($request->get_method() === 'OPTIONS') {
+            status_header(200);
+            exit;
+        }
+        
+        return $served;
+    }
+    
+    /**
+     * Get list of allowed origins
+     * 
+     * @return array Allowed origins
+     */
+    private function get_allowed_origins() {
+        // Development origins
+        $dev_origins = array(
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'http://localhost:10000',
+            'http://127.0.0.1:3000',
+            'http://127.0.0.1:3001',
+            'http://127.0.0.1:10000',
+        );
+        
+        // Production origins
+        $production_origins = array(
+            'https://ogcnewfinity.com',
+            'https://www.ogcnewfinity.com',
+            'https://api.ogcnewfinity.com',
+        );
+        
+        // Merge based on environment
+        if (defined('WP_DEBUG') && WP_DEBUG && (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local')) {
+            return $dev_origins;
+        }
+        
+        return array_merge($dev_origins, $production_origins);
     }
     
     /**

@@ -15,25 +15,23 @@ export const getApiKey = () => {
 };
 
 /**
- * Get saved settings (for frontend compatibility)
- * Note: This uses localStorage which is not available in Node.js
- * In backend context, settings should come from database or environment variables
+ * Get saved settings (backend only)
+ * SECURITY: Backend should only use environment variables for API keys.
+ * Provider preference can come from database or default to env config.
  */
 export const getSavedSettings = () => {
   // In backend, provider selection should come from database or default to env config
-  // For now, default to gemini if GEMINI_API_KEY is available
   const provider = process.env.DEFAULT_AI_PROVIDER || 'gemini';
+  // SECURITY: Only return provider preference, never API keys from settings
   return { 
-    provider,
-    openaiKey: process.env.OPENAI_API_KEY || null,
-    claudeKey: process.env.ANTHROPIC_API_KEY || null,
-    llamaKey: process.env.GROQ_API_KEY || null
+    provider
   };
 };
 
 /**
  * Get provider configuration
- * Returns configuration for the specified AI provider with API keys from environment
+ * SECURITY: Returns configuration with API keys from environment variables ONLY.
+ * Never falls back to settings or any other source for API keys.
  */
 export const getProviderConfig = () => {
   const settings = getSavedSettings();
@@ -46,17 +44,20 @@ export const getProviderConfig = () => {
       model: 'gemini-3-pro-preview' 
     },
     openai: { 
-      key: process.env.OPENAI_API_KEY || settings.openaiKey || null, 
+      // SECURITY: Only use environment variable, never fallback to settings
+      key: process.env.OPENAI_API_KEY || null, 
       baseUrl: 'https://api.openai.com/v1/chat/completions', 
       model: 'gpt-4o' 
     },
     anthropic: { 
-      key: process.env.ANTHROPIC_API_KEY || settings.claudeKey || null, 
+      // SECURITY: Only use environment variable, never fallback to settings
+      key: process.env.ANTHROPIC_API_KEY || null, 
       baseUrl: 'https://api.anthropic.com/v1/messages', 
       model: 'claude-3-5-sonnet-latest' 
     },
     llama: { 
-      key: process.env.GROQ_API_KEY || settings.llamaKey || null, 
+      // SECURITY: Only use environment variable, never fallback to settings
+      key: process.env.GROQ_API_KEY || null, 
       baseUrl: 'https://api.groq.com/openai/v1/chat/completions', 
       model: 'llama-3.3-70b-versatile' 
     }

@@ -2,52 +2,64 @@
  * Provider Utilities
  * Functions for AI provider logic, configuration, and model mappings
  * 
+ * SECURITY: This module does NOT handle API keys. All API keys are stored
+ * server-side in environment variables and accessed only by backend services.
+ * Frontend should only store provider preferences and make API calls through
+ * backend endpoints.
+ * 
  * This module provides utilities for:
- * - Provider configuration management
+ * - Provider configuration management (metadata only, no keys)
  * - Model selection and mapping
- * - Provider settings retrieval
- * - API key resolution
+ * - Provider settings retrieval (preferences only)
  * 
  * @module utils/providerUtils
  */
 
 /**
  * Get saved settings from localStorage
+ * SECURITY: Only stores provider preference and non-sensitive settings.
+ * API keys are NEVER stored in localStorage or accessed by frontend.
  * 
- * @returns {Object} Settings object with provider and API keys
+ * @returns {Object} Settings object with provider preference (no API keys)
  * 
  * @example
  * const settings = getSavedSettings();
- * // Returns: { provider: 'gemini', openaiKey: '...', claudeKey: '...', ... }
+ * // Returns: { provider: 'gemini', focusKeyphrase: '...' }
  */
 export const getSavedSettings = () => {
   try {
     const saved = localStorage.getItem('nova_xfinity_settings');
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      // SECURITY: Remove any API keys that might have been stored previously
+      const { openaiKey, claudeKey, llamaKey, geminiKey, ...safeSettings } = parsed;
+      if (openaiKey || claudeKey || llamaKey || geminiKey) {
+        console.warn('⚠️ SECURITY: API keys detected in localStorage. Removing them.');
+        localStorage.setItem('nova_xfinity_settings', JSON.stringify(safeSettings));
+      }
+      return safeSettings;
     }
   } catch (e) {
     console.error('Failed to parse saved settings:', e);
   }
   
-  // Return default settings
+  // Return default settings (no API keys)
   return {
     provider: 'gemini',
-    openaiKey: '',
-    claudeKey: '',
-    llamaKey: '',
     focusKeyphrase: ''
   };
 };
 
 /**
  * Get provider configuration based on current settings
+ * SECURITY: Returns provider metadata only. Does NOT include API keys.
+ * All AI provider API calls must go through backend endpoints.
  * 
- * @returns {Object} Provider configuration with id, key, baseUrl, and model
+ * @returns {Object} Provider configuration with id, baseUrl, and model (NO KEY)
  * 
  * @example
  * const config = getProviderConfig();
- * // Returns: { id: 'gemini', key: '...', baseUrl: '...', model: '...' }
+ * // Returns: { id: 'gemini', baseUrl: '...', model: '...' }
  */
 export const getProviderConfig = () => {
   const settings = getSavedSettings();
@@ -55,22 +67,18 @@ export const getProviderConfig = () => {
   
   const configs = {
     gemini: { 
-      key: import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.GEMINI_API_KEY || process.env.API_KEY, 
       baseUrl: 'https://generativelanguage.googleapis.com', 
       model: 'gemini-3-pro-preview' 
     },
     openai: { 
-      key: settings.openaiKey, 
       baseUrl: 'https://api.openai.com/v1/chat/completions', 
       model: 'gpt-4o' 
     },
     anthropic: { 
-      key: settings.claudeKey, 
       baseUrl: 'https://api.anthropic.com/v1/messages', 
       model: 'claude-3-5-sonnet-latest' 
     },
     llama: { 
-      key: settings.llamaKey, 
       baseUrl: 'https://api.groq.com/openai/v1/chat/completions', 
       model: 'llama-3.3-70b-versatile' 
     }
@@ -82,20 +90,14 @@ export const getProviderConfig = () => {
 /**
  * Get API key for current provider
  * 
- * @returns {string|null} API key or null if not available
+ * @deprecated SECURITY: This function is deprecated. API keys should NEVER
+ * be accessed from frontend. All AI provider calls must go through backend APIs.
  * 
- * @example
- * const apiKey = getApiKey();
- * // Returns: 'AIza...' or null
+ * @returns {null} Always returns null - keys are server-side only
  */
 export const getApiKey = () => {
-  try {
-    const config = getProviderConfig();
-    return config.key || null;
-  } catch (e) {
-    console.error('Failed to get API key:', e);
-    return null;
-  }
+  console.warn('⚠️ SECURITY: getApiKey() called from frontend. API keys are server-side only.');
+  return null;
 };
 
 /**
